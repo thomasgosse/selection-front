@@ -11,7 +11,7 @@
             uk-toggle="target: #offcanvas-push"/>
         </li>
         <li class="uk-active">
-          <a @click="goToHomePage">CULTURECTION</a>
+          <a @click="onClick">CULTURECTION</a>
         </li>
       </ul>
     </div>
@@ -28,9 +28,10 @@
 <script>
 export default {
   name: 'HeaderBar',
-  methods: {
-    goToHomePage() {
-      this.$router.push('/');
+  props: {
+    onClick: {
+      type: Function,
+      required: true,
     },
   },
 };

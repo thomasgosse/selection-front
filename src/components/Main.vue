@@ -1,20 +1,20 @@
 <template>
   <div>
-    <HeaderBar/>
-    <SearchBar/>
+    <HeaderBarContainer/>
+    <SearchBarContainer/>
     <router-view/>
   </div>
 </template>
 
 <script>
-import SearchBar from '@/components/Search/SearchBar';
-import HeaderBar from '@/components/Shared/HeaderBar';
+import SearchBarContainer from '@/components/Search/SearchBarContainer';
+import HeaderBarContainer from '@/components/Shared/HeaderBarContainer';
 
 export default {
   name: 'Main',
   components: {
-    SearchBar,
-    HeaderBar,
+    SearchBarContainer,
+    HeaderBarContainer,
   },
 };
 </script>

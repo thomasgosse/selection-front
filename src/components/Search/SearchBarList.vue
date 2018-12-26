@@ -19,7 +19,7 @@
           </div>
           <div class="uk-width-2-3@m">
             <div>
-              {{ item.title }}
+              {{ item.name }}
             </div>
             <div class="uk-text-meta">
               {{ item.type }}

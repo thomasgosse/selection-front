@@ -1,6 +1,6 @@
 <template>
   <SearchBar
-    :on-change="search"
+    :on-change="debouncedSearch"
   >
     <SearchBarList
       :items="items"
@@ -14,6 +14,7 @@ import UIkit from 'uikit';
 import SearchBar from '@/components/Search/SearchBar';
 import SearchBarList from '@/components/Search/SearchBarList';
 import { getSearchResult } from '@/services/discogs';
+import { debounce } from 'lodash';
 
 const defaultImage = require('@/assets/logo.png');
 
@@ -26,20 +27,26 @@ export default {
   data() {
     return {
       items: [],
+      debouncedSearch: debounce(this.search, 250),
     };
   },
   methods: {
-    hasImage(uri) {
-      return uri !== 'https://img.discogs.com/images/spacer.gif';
+    hasImage(images) {
+      return images.length > 0;
+    },
+    removeTrash(title) {
+      const regex = /\([0-9]*\)/g;
+      return title.replace(regex, '');
     },
     search(search) {
       if (search.length > 1) {
         getSearchResult(search)
           .then((response) => {
-            const results = response.results;
+            console.log(response);
+            const results = response.artists.items;
             this.items = results.map(item => ({
               ...item,
-              cover_image: (this.hasImage(item.cover_image)) ? item.cover_image : defaultImage,
+              cover_image: this.hasImage(item.images) ? item.images[0].url : defaultImage,
             }));
           });
       }

@@ -13,7 +13,7 @@
 import UIkit from 'uikit';
 import SearchBar from '@/components/Search/SearchBar';
 import SearchBarList from '@/components/Search/SearchBarList';
-import { getSearchResult } from '@/services/discogs';
+import { getSearchResult } from '@/services/spotify';
 import { debounce } from 'lodash';
 
 const defaultImage = require('@/assets/logo.png');
@@ -34,15 +34,10 @@ export default {
     hasImage(images) {
       return images.length > 0;
     },
-    removeTrash(title) {
-      const regex = /\([0-9]*\)/g;
-      return title.replace(regex, '');
-    },
     search(search) {
       if (search.length > 1) {
         getSearchResult(search)
           .then((response) => {
-            console.log(response);
             const results = response.artists.items;
             this.items = results.map(item => ({
               ...item,
@@ -54,7 +49,7 @@ export default {
     },
     onClick() {
       UIkit.offcanvas('#offcanvas-push').toggle();
-      this.$router.push('/');
+      this.$router.push({ path: '/' });
     },
   },
 };

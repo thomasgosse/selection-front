@@ -18,7 +18,9 @@
     <div class="uk-navbar-right uk-margin-right">
       <ul class="uk-navbar-nav">
         <li class="uk-active">
-          <a uk-icon="sign-in">Log-in</a>
+          <a
+            :href="authorize"
+            uk-icon="sign-in">Log-in</a>
         </li>
       </ul>
     </div>
@@ -32,6 +34,15 @@ export default {
     onClick: {
       type: Function,
       required: true,
+    },
+  },
+  computed: {
+    authorize() {
+      const baseUri = 'https://accounts.spotify.com/authorize';
+      const clientId = '906d6aec87c5496c8e466a84591bf3dc';
+      const responseType = 'token';
+      const redirectUri = 'http:%2F%2Flocalhost:8080%2Fcallback';
+      return `${baseUri}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}`;
     },
   },
 };

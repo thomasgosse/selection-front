@@ -37,6 +37,7 @@
         <div uk-dropdown="mode: click">
           <button
             class="uk-button uk-button-primary"
+            @click="onLogout"
           >
             Deconnexion
           </button>
@@ -60,6 +61,10 @@ export default {
   name: 'HeaderBar',
   props: {
     onClick: {
+      type: Function,
+      required: true,
+    },
+    onLogout: {
       type: Function,
       required: true,
     },

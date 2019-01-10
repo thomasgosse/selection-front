@@ -1,6 +1,7 @@
 <template>
   <HeaderBar
     :on-click="goToHomePage"
+    :on-logout="logout"
     :is-authorized="isAuthorized"
     :profile-image="profileImage"
   />
@@ -27,6 +28,12 @@ export default {
   },
   methods: {
     goToHomePage() {
+      this.$router.push({ path: '/' });
+    },
+    logout() {
+      this.$store.commit('login', false);
+      this.$store.commit('token', '');
+      localStorage.removeItem('token');
       this.$router.push({ path: '/' });
     },
   },

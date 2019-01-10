@@ -1,30 +1,56 @@
 <template>
   <nav
     class="uk-navbar-container"
-    uk-navbar>
+    uk-navbar
+  >
+
     <div class="uk-navbar-left">
       <ul class="uk-navbar-nav">
-        <li
+        <a
           v-if="isAuthorized"
-          class="uk-active">
-          <a
-            class="uk-margin-left"
-            uk-icon="search"
-            uk-toggle="target: #offcanvas-push"/>
-        </li>
-        <li class="uk-active">
-          <a @click="onClick">CULTURECTION</a>
-        </li>
+          class="uk-margin-left uk-icon-button"
+          uk-icon="search"
+          uk-toggle="target: #offcanvas-push"/>
       </ul>
+      <a
+        class="uk-navbar-item uk-logo"
+        @click="onClick">
+        Culturection
+      </a>
     </div>
+
     <div class="uk-navbar-right uk-margin-right">
-      <ul class="uk-navbar-nav">
-        <li class="uk-active">
-          <a
-            :href="authorize"
-            uk-icon="sign-in">Log-in</a>
-        </li>
-      </ul>
+      <div
+        v-if="isAuthorized"
+        class="uk-inline">
+        <div
+          class="uk-icon-button"
+        >
+          <img
+            :data-src="profileImage"
+            class="profile-image"
+            uk-img
+            width="25"
+            height="25"
+          >
+        </div>
+        <div uk-dropdown="mode: click">
+          <button
+            class="uk-button uk-button-primary"
+          >
+            Deconnexion
+          </button>
+        </div>
+      </div>
+      <a
+        v-else
+        :href="authorize"
+        class="uk-icon-button"
+      >
+        <font-awesome-icon
+          :icon="['fab', 'spotify']"
+          size="lg"/>
+      </a>
     </div>
   </nav>
 </template>
@@ -41,6 +67,10 @@ export default {
       type: Boolean,
       required: true,
     },
+    profileImage: {
+      type: String,
+      required: true,
+    },
   },
   computed: {
     authorize() {
@@ -54,3 +84,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.profile-image {
+  border-radius: 50%;
+}
+</style>
+

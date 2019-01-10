@@ -2,12 +2,14 @@
   <HeaderBar
     :on-click="goToHomePage"
     :is-authorized="isAuthorized"
+    :profile-image="profileImage"
   />
 </template>
 
 
 <script>
 import HeaderBar from '@/components/Shared/HeaderBar';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'HeaderBarContainer',
@@ -19,6 +21,9 @@ export default {
       type: Boolean,
       required: true,
     },
+  },
+  computed: {
+    ...mapGetters(['profileImage']),
   },
   methods: {
     goToHomePage() {

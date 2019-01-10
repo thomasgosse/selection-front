@@ -9,7 +9,7 @@
         <a
           v-if="isAuthorized"
           class="uk-margin-left uk-icon-button"
-          uk-icon="search"
+          uk-icon="icon: search; ratio: 1.4"
           uk-toggle="target: #offcanvas-push"/>
       </ul>
       <a
@@ -30,8 +30,8 @@
             :data-src="profileImage"
             class="profile-image"
             uk-img
-            width="25"
-            height="25"
+            width="35"
+            height="35"
           >
         </div>
         <div uk-dropdown="mode: click">
@@ -93,6 +93,11 @@ export default {
 <style scoped>
 .profile-image {
   border-radius: 50%;
+}
+
+.uk-icon-button {
+  height: 3rem;
+  width: 3rem;
 }
 </style>
 

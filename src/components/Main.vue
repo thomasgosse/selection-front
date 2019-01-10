@@ -1,8 +1,8 @@
 <template>
   <div>
-    <HeaderBarContainer :is-authorized="isLoggedIn"/>
+    <HeaderBarContainer :is-authorized="loggedIn"/>
     <SearchBarContainer/>
-    <router-view v-if="isLoggedIn"/>
+    <router-view v-if="loggedIn"/>
     <HasNotRight v-else/>
   </div>
 </template>
@@ -11,6 +11,7 @@
 import SearchBarContainer from '@/components/Search/SearchBarContainer';
 import HeaderBarContainer from '@/components/Shared/HeaderBarContainer';
 import HasNotRight from '@/components/HasNotRight';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Main',
@@ -20,9 +21,7 @@ export default {
     HasNotRight,
   },
   computed: {
-    isLoggedIn() {
-      return this.$store.state.loggedIn;
-    },
+    ...mapState(['loggedIn']),
   },
 };
 </script>

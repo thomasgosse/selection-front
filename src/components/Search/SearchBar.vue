@@ -4,7 +4,10 @@
     uk-offcanvas="mode: push; overlay: true">
     <div class="uk-offcanvas-bar uk-margin-small">
       <div>
-        <form class="uk-search uk-search-navbar">
+        <form
+          class="uk-search uk-search-navbar"
+          @submit.prevent="onChange(search)"
+        >
           <span uk-search-icon/>
           <input
             v-model="search"

@@ -25,8 +25,3 @@ export async function getProfile() {
     })
     .then(response => response.data);
 }
-
-export async function getUri(uri) {
-  axios.get(uri)
-    .then(response => response.data);
-}

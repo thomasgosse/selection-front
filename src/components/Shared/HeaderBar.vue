@@ -4,7 +4,9 @@
     uk-navbar>
     <div class="uk-navbar-left">
       <ul class="uk-navbar-nav">
-        <li class="uk-active">
+        <li
+          v-if="isAuthorized"
+          class="uk-active">
           <a
             class="uk-margin-left"
             uk-icon="search"
@@ -35,6 +37,10 @@ export default {
       type: Function,
       required: true,
     },
+    isAuthorized: {
+      type: Boolean,
+      required: true,
+    },
   },
   computed: {
     authorize() {
@@ -42,7 +48,8 @@ export default {
       const clientId = '906d6aec87c5496c8e466a84591bf3dc';
       const responseType = 'token';
       const redirectUri = 'http:%2F%2Flocalhost:8080%2Fcallback';
-      return `${baseUri}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}`;
+      const scopes = 'user-read-private%20user-read-email%20user-read-birthdate';
+      return `${baseUri}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scopes}`;
     },
   },
 };

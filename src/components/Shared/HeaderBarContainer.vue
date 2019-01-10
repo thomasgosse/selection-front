@@ -1,6 +1,7 @@
 <template>
   <HeaderBar
     :on-click="goToHomePage"
+    :is-authorized="isAuthorized"
   />
 </template>
 
@@ -13,9 +14,15 @@ export default {
   components: {
     HeaderBar,
   },
+  props: {
+    isAuthorized: {
+      type: Boolean,
+      required: true,
+    },
+  },
   methods: {
     goToHomePage() {
-      this.$router.push('/');
+      this.$router.push({ path: '/' });
     },
   },
 };

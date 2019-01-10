@@ -5,8 +5,14 @@
 </template>
 
 <script>
+import { getProfile } from './services/spotify';
+
 export default {
   name: 'App',
+  mounted() {
+    this.$store.commit('token', localStorage.getItem('token'));
+    console.log(getProfile());
+  },
 };
 </script>
 

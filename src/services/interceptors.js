@@ -10,7 +10,7 @@ export default {
           console.log('expired token');
         }
         UIkit.offcanvas('#offcanvas-push').hide();
-        store.commit('login', false);
+        store.commit('logout');
       },
     );
   },

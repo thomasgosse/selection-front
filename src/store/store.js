@@ -13,8 +13,11 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    login(state, log) {
-      state.loggedIn = log;
+    login(state) {
+      state.loggedIn = true;
+    },
+    logout(state) {
+      state.loggedIn = false;
     },
     token(state, token) {
       state.token = token;

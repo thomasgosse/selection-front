@@ -31,7 +31,7 @@ export default {
       this.$router.push({ path: '/' });
     },
     logout() {
-      this.$store.commit('login', false);
+      this.$store.commit('logout');
       this.$store.commit('token', '');
       localStorage.removeItem('token');
       this.$router.push({ path: '/' });

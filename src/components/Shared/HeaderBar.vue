@@ -16,39 +16,40 @@
         class="uk-navbar-item uk-logo"
         @click="onClick">
         <img
-          src="../../assets/selection.png"
+          src="@/assets/selection.png"
           class="logo"
         >
         selection
       </a>
     </div>
 
-    <div class="uk-navbar-right uk-margin-right">
-      <div
-        v-if="isAuthorized"
-        class="uk-inline">
-        <div
-          class="uk-icon-button"
+    <div
+      v-if="isAuthorized"
+      class="uk-navbar-right uk-margin-right"
+    >
+      <a class="uk-icon-button">
+        <img
+          :data-src="profileImage"
+          class="uk-border-circle"
+          uk-img
+          width="35"
+          height="35"
         >
-          <img
-            :data-src="profileImage"
-            class="uk-border-circle"
-            uk-img
-            width="35"
-            height="35"
-          >
-        </div>
-        <div uk-dropdown="mode: click">
-          <button
-            class="uk-button uk-button-primary"
-            @click="onLogout"
-          >
-            Deconnexion
-          </button>
-        </div>
+      </a>
+      <div uk-dropdown="mode: click">
+        <button
+          class="uk-button uk-button-primary"
+          @click="onLogout"
+        >
+          Deconnexion
+        </button>
       </div>
+    </div>
+
+    <div
+      v-else
+      class="uk-navbar-right uk-margin-right">
       <a
-        v-else
         :href="authorize"
         class="uk-icon-button"
       >
@@ -57,6 +58,7 @@
           size="2x"/>
       </a>
     </div>
+
   </nav>
 </template>
 

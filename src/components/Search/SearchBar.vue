@@ -2,16 +2,22 @@
   <div
     id="offcanvas-push"
     uk-offcanvas="mode: push; overlay: true">
-    <div class="uk-offcanvas-bar">
+    <div class="uk-offcanvas-bar uk-margin-small">
       <div>
-        <form class="uk-search uk-search-navbar">
-          <span uk-search-icon/>
+        <form
+          class="uk-search uk-search-navbar"
+          @submit.prevent="onChange(search)"
+        >
           <input
+            v-model="search"
             class="uk-search-input"
             type="search"
-            placeholder="Search...">
+            placeholder="Search..."
+            @input="onChange(search)"
+          >
         </form>
       </div>
+      <slot/>
     </div>
   </div>
 </template>
@@ -19,6 +25,17 @@
 <script>
 export default {
   name: 'SearchBar',
+  props: {
+    onChange: {
+      type: Function,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      search: '',
+    };
+  },
 };
 </script>
 

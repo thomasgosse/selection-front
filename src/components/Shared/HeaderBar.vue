@@ -1,27 +1,64 @@
 <template>
   <nav
     class="uk-navbar-container"
-    uk-navbar>
+    uk-navbar
+  >
+
     <div class="uk-navbar-left">
       <ul class="uk-navbar-nav">
-        <li class="uk-active">
-          <a
-            class="uk-margin-left"
-            uk-icon="search"
-            uk-toggle="target: #offcanvas-push"/>
-        </li>
-        <li class="uk-active">
-          <a @click="onClick">CULTURECTION</a>
-        </li>
+        <a
+          v-if="isAuthorized"
+          class="uk-margin-left uk-icon-button"
+          uk-icon="icon: search; ratio: 1.4"
+          uk-toggle="target: #offcanvas-push"/>
       </ul>
+      <a
+        class="uk-navbar-item uk-logo"
+        @click="onClick">
+        <img
+          src="@/assets/selection.png"
+          class="logo"
+        >
+        selection
+      </a>
     </div>
-    <div class="uk-navbar-right uk-margin-right">
-      <ul class="uk-navbar-nav">
-        <li class="uk-active">
-          <a uk-icon="sign-in">Log-in</a>
-        </li>
-      </ul>
+
+    <div
+      v-if="isAuthorized"
+      class="uk-navbar-right uk-margin-right"
+    >
+      <a class="uk-icon-button">
+        <img
+          :data-src="profileImage"
+          class="uk-border-circle"
+          uk-img
+          width="35"
+          height="35"
+        >
+      </a>
+      <div uk-dropdown="mode: click">
+        <button
+          class="uk-button uk-button-primary"
+          @click="onLogout"
+        >
+          Deconnexion
+        </button>
+      </div>
     </div>
+
+    <div
+      v-else
+      class="uk-navbar-right uk-margin-right">
+      <a
+        :href="authorize"
+        class="uk-icon-button"
+      >
+        <font-awesome-icon
+          :icon="['fab', 'spotify']"
+          size="2x"/>
+      </a>
+    </div>
+
   </nav>
 </template>
 
@@ -33,6 +70,41 @@ export default {
       type: Function,
       required: true,
     },
+    onLogout: {
+      type: Function,
+      required: true,
+    },
+    isAuthorized: {
+      type: Boolean,
+      required: true,
+    },
+    profileImage: {
+      type: String,
+      required: true,
+    },
+  },
+  computed: {
+    authorize() {
+      const baseUri = 'https://accounts.spotify.com/authorize';
+      const clientId = '906d6aec87c5496c8e466a84591bf3dc';
+      const responseType = 'token';
+      const redirectUri = 'http:%2F%2Flocalhost:8080%2Fcallback';
+      const scopes = 'user-read-private%20user-read-email%20user-read-birthdate';
+      return `${baseUri}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scopes}`;
+    },
   },
 };
 </script>
+
+<style scoped>
+.uk-icon-button {
+  height: 3rem;
+  width: 3rem;
+}
+
+.logo {
+  height: 3rem;
+  width: 4.3rem;
+}
+</style>
+

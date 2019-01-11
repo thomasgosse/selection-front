@@ -1,21 +1,40 @@
 <template>
   <HeaderBar
     :on-click="goToHomePage"
+    :on-logout="logout"
+    :is-authorized="isAuthorized"
+    :profile-image="profileImage"
   />
 </template>
 
 
 <script>
 import HeaderBar from '@/components/Shared/HeaderBar';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'HeaderBarContainer',
   components: {
     HeaderBar,
   },
+  props: {
+    isAuthorized: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  computed: {
+    ...mapGetters(['profileImage']),
+  },
   methods: {
     goToHomePage() {
-      this.$router.push('/');
+      this.$router.push({ path: '/' });
+    },
+    logout() {
+      this.$store.commit('logout');
+      this.$store.commit('token', '');
+      localStorage.removeItem('token');
+      this.$router.push({ path: '/' });
     },
   },
 };

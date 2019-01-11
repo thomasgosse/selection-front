@@ -1,5 +1,5 @@
 <template>
-  <div><p>YOU DONT HAVE TO BE HERE</p></div>
+  <div><p>YOU ARE NOT LOGGED IN</p></div>
 </template>
 
 <script>

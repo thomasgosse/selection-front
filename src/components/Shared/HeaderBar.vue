@@ -16,7 +16,7 @@
         class="uk-navbar-item uk-logo"
         @click="onClick">
         <img
-          src="../../assets/test.png"
+          src="../../assets/selection.png"
           class="logo"
         >
         selection

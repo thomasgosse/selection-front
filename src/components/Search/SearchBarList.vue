@@ -7,14 +7,13 @@
       >
         <td
           uk-grid
-          class="uk-grid-small uk-child-width-expand@s uk-text-left"
+          class="artist uk-grid-small uk-child-width-expand@s uk-text-left"
           @click="onClick">
           <div class="uk-width-1-3@m">
             <img
               :data-src="item.cover_image"
+              class="uk-border-circle"
               uk-img
-              width="70"
-              height="70"
             >
           </div>
           <div class="uk-width-2-3@m">
@@ -24,7 +23,6 @@
             <div class="uk-text-meta">
               {{ item.type }}
             </div>
-
           </div>
         </td>
       </tr>
@@ -48,9 +46,19 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .uk-text-meta {
   text-transform: capitalize
+}
+
+.artist:hover {
+  background-color: green;
+  cursor: pointer;
+}
+
+.uk-border-circle {
+  width: 4rem;
+  height: 4rem;
 }
 </style>
 

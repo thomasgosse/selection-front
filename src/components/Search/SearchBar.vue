@@ -8,7 +8,6 @@
           class="uk-search uk-search-navbar"
           @submit.prevent="onChange(search)"
         >
-          <span uk-search-icon/>
           <input
             v-model="search"
             class="uk-search-input"

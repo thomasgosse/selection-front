@@ -15,7 +15,11 @@
       <a
         class="uk-navbar-item uk-logo"
         @click="onClick">
-        Culturection
+        <img
+          src="../../assets/test.png"
+          class="logo"
+        >
+        selection
       </a>
     </div>
 
@@ -28,7 +32,7 @@
         >
           <img
             :data-src="profileImage"
-            class="profile-image"
+            class="uk-border-circle"
             uk-img
             width="35"
             height="35"
@@ -50,7 +54,7 @@
       >
         <font-awesome-icon
           :icon="['fab', 'spotify']"
-          size="lg"/>
+          size="2x"/>
       </a>
     </div>
   </nav>
@@ -91,13 +95,14 @@ export default {
 </script>
 
 <style scoped>
-.profile-image {
-  border-radius: 50%;
-}
-
 .uk-icon-button {
   height: 3rem;
   width: 3rem;
+}
+
+.logo {
+  height: 3rem;
+  width: 4.3rem;
 }
 </style>
 

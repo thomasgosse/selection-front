@@ -61,4 +61,3 @@ export default {
   height: 4rem;
 }
 </style>
-

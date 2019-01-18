@@ -109,4 +109,3 @@ export default {
   width: 4.3rem;
 }
 </style>
-

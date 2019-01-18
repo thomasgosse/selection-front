@@ -12,6 +12,7 @@ import SearchBarContainer from '@/components/Search/SearchBarContainer';
 import HeaderBarContainer from '@/components/Shared/HeaderBarContainer';
 import HasNotRight from '@/components/HasNotRight';
 import { mapState } from 'vuex';
+import { getProfile } from '../services/spotify';
 
 export default {
   name: 'Main',
@@ -22,6 +23,15 @@ export default {
   },
   computed: {
     ...mapState(['loggedIn']),
+  },
+  beforeMount() {
+    getProfile().then((result) => {
+      const user = {
+        mainImage: result.images[0],
+        name: result.display_name,
+      };
+      this.$store.commit('user', user);
+    });
   },
 };
 </script>

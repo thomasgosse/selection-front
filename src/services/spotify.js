@@ -1,8 +1,7 @@
 import axios from 'axios';
-import store from '../store/store';
 
 function getToken() {
-  const token = store.state.token;
+  const token = localStorage.getItem('token');
   return 'Bearer '.concat(token);
 }
 

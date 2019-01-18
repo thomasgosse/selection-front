@@ -19,7 +19,7 @@
           src="@/assets/selection.png"
           class="logo"
         >
-        selection
+        Selection
       </a>
     </div>
 
@@ -49,14 +49,16 @@
     <div
       v-else
       class="uk-navbar-right uk-margin-right">
-      <a
-        :href="authorize"
-        class="uk-icon-button"
-      >
-        <font-awesome-icon
-          :icon="['fab', 'spotify']"
-          size="2x"/>
-      </a>
+      <ul class="uk-navbar-nav">
+        <a
+          :href="authorize"
+          class="uk-icon-button"
+        >
+          <font-awesome-icon
+            :icon="['fab', 'spotify']"
+            size="2x"/>
+        </a>
+      </ul>
     </div>
 
   </nav>

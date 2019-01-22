@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Main from '@/components/Main';
 import Callback from '@/components/Callback';
-import ArtistView from '@/components/Artist/ArtistView';
+import ArtistContainer from '@/components/Artist/ArtistContainer';
 
 Vue.use(Router);
 
@@ -16,8 +16,8 @@ export default new Router({
       children: [
         {
           path: 'artist/:id',
-          name: 'ArtistView',
-          component: ArtistView,
+          name: 'ArtistContainer',
+          component: ArtistContainer,
           props: true,
         },
       ],

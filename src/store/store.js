@@ -3,6 +3,7 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
 import { getArtist } from '@/services/spotify';
+import _ from 'lodash';
 
 Vue.use(Vuex);
 
@@ -15,7 +16,7 @@ export default new Vuex.Store({
       name: '',
     },
     artist: {},
-    albums: {},
+    artworks: {},
   },
   mutations: {
     login(state) {
@@ -33,8 +34,8 @@ export default new Vuex.Store({
     artist(state, artist) {
       state.artist = artist;
     },
-    albums(state, albums) {
-      state.albums = albums;
+    artworks(state, artworks) {
+      state.artworks = artworks;
     },
   },
   actions: {
@@ -42,7 +43,7 @@ export default new Vuex.Store({
       return getArtist(id)
         .then((result) => {
           commit('artist', result.artist);
-          commit('albums', result.albums);
+          commit('artworks', result.albums);
           return result;
         });
     },
@@ -51,6 +52,22 @@ export default new Vuex.Store({
     profileImage(state) {
       const image = state.user.mainImage.url;
       return image || '';
+    },
+    albums(state) {
+      const artworks = state.artworks.items;
+      if(artworks) {
+        const alb = artworks.filter(album => album.album_type === 'album');
+        return _.uniqBy(alb, 'name');
+      }
+      return [];
+    },
+    singles(state) {
+      const artworks = state.artworks.items;
+      if(artworks) {
+        const singles = artworks.filter(album => album.album_type === 'single');
+        return _.uniqBy(singles, 'name');
+      }
+      return [];
     },
   },
 });

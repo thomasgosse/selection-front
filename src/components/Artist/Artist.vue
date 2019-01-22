@@ -1,5 +1,4 @@
 <template>
-  <!-- to refactor -->
   <div
     class="uk-container uk-container-large uk-padding"
   >
@@ -9,78 +8,26 @@
       <h1 class="uk-article-title">
         {{ name }}
       </h1>
-      <h2 class="uk-article-title">
-        Albums
-      </h2>
-      <div
-        class="uk-flex-middle"
-        uk-grid
-      >
-        <div
-          v-for="album in albums"
-          :key="album.id"
-          class="uk-width-1-6@m"
-        >
-          <div
-            class="uk-inline-clip uk-transition-toggle"
-            tabindex="0"
-          >
-            <img
-              :data-src="album.images[0].url"
-              uk-img
-            >
-            <div
-              class="uk-transition-fade uk-position-cover
-                     uk-position-small uk-overlay uk-overlay-default
-                     uk-flex uk-flex-center uk-flex-middle"
-            >
-              <p class="uk-h4 uk-margin-remove">
-                {{ album.name }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <h2 class="uk-article-title">
-        Singles & EPs
-      </h2>
-      <div
-        class="uk-flex-middle"
-        uk-grid
-      >
-        <div
-          v-for="single in singles"
-          :key="single.id"
-          class="uk-width-1-6@m"
-        >
-          <div
-            class="uk-inline-clip uk-transition-toggle"
-            tabindex="0"
-          >
-            <img
-              :data-src="single.images[0].url"
-              uk-img
-            >
-            <div
-              class="uk-transition-fade uk-position-cover
-                     uk-position-small uk-overlay uk-overlay-default
-                     uk-flex uk-flex-center uk-flex-middle"
-            >
-              <p class="uk-h4 uk-margin-remove">
-                {{ single.name }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ArtworkList
+        title="Albums"
+        :items="albums"
+      />
+      <ArtworkList
+        title="Singles & EPs"
+        :items="singles"
+      />
     </article>
   </div>
 </template>
 
 <script>
+import ArtworkList from '@/components/Artist/ArtworkList';
+
 export default {
   name: 'Artist',
+  components: {
+    ArtworkList,
+  },
   props: {
     name: {
       type: String,

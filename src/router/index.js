@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Main from '@/components/Main';
 import Callback from '@/components/Callback';
-import Testing from '../components/Testing';
+import ArtistView from '@/components/Artist/ArtistView';
 
 Vue.use(Router);
 
@@ -13,12 +13,12 @@ export default new Router({
       path: '/',
       name: 'Main',
       component: Main,
-      props: true,
       children: [
         {
-          path: 'test',
-          name: 'Test',
-          component: Testing,
+          path: 'artist/:id',
+          name: 'ArtistView',
+          component: ArtistView,
+          props: true,
         },
       ],
     },

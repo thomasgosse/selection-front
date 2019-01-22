@@ -1,6 +1,6 @@
 <template>
   <SearchBar
-    :on-change="debouncedSearch"
+    :on-change="search"
   >
     <SearchBarList
       :items="items"
@@ -14,7 +14,6 @@ import UIkit from 'uikit';
 import SearchBar from '@/components/Search/SearchBar';
 import SearchBarList from '@/components/Search/SearchBarList';
 import { getSearchResult } from '@/services/spotify';
-import { debounce } from 'lodash';
 
 const defaultImage = require('@/assets/logo.png');
 
@@ -27,7 +26,6 @@ export default {
   data() {
     return {
       items: [],
-      debouncedSearch: debounce(this.search, 250),
     };
   },
   methods: {
@@ -47,9 +45,9 @@ export default {
       }
       return [];
     },
-    onClick() {
+    onClick(item) {
       UIkit.offcanvas('#offcanvas-push').toggle();
-      this.$router.push({ path: '/' });
+      this.$router.push({ path: `/artist/${item.id}` });
     },
   },
 };

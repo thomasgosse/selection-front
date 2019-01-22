@@ -8,7 +8,8 @@
         <td
           uk-grid
           class="artist uk-grid-small uk-child-width-expand@s uk-text-left"
-          @click="onClick">
+          @click="onClick(item)"
+        >
           <div class="uk-width-1-3@m">
             <img
               :data-src="item.cover_image"
@@ -61,4 +62,3 @@ export default {
   height: 4rem;
 }
 </style>
-

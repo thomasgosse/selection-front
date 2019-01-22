@@ -3,18 +3,19 @@
     class="uk-navbar-container"
     uk-navbar
   >
-
     <div class="uk-navbar-left">
       <ul class="uk-navbar-nav">
         <a
           v-if="isAuthorized"
           class="uk-margin-left uk-icon-button"
           uk-icon="icon: search; ratio: 1.4"
-          uk-toggle="target: #offcanvas-push"/>
+          uk-toggle="target: #offcanvas-push"
+        />
       </ul>
       <a
         class="uk-navbar-item uk-logo"
-        @click="onClick">
+        @click="onClick"
+      >
         <img
           src="@/assets/selection.png"
           class="logo"
@@ -48,7 +49,8 @@
 
     <div
       v-else
-      class="uk-navbar-right uk-margin-right">
+      class="uk-navbar-right uk-margin-right"
+    >
       <ul class="uk-navbar-nav">
         <a
           :href="authorize"
@@ -56,11 +58,11 @@
         >
           <font-awesome-icon
             :icon="['fab', 'spotify']"
-            size="2x"/>
+            size="2x"
+          />
         </a>
       </ul>
     </div>
-
   </nav>
 </template>
 
@@ -109,4 +111,3 @@ export default {
   width: 4.3rem;
 }
 </style>
-

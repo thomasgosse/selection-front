@@ -1,7 +1,8 @@
 <template>
   <div
     id="offcanvas-push"
-    uk-offcanvas="mode: push; overlay: true">
+    uk-offcanvas="mode: push; overlay: true"
+  >
     <div class="uk-offcanvas-bar uk-margin-small">
       <div>
         <form
@@ -13,11 +14,10 @@
             class="uk-search-input"
             type="search"
             placeholder="Search..."
-            @input="onChange(search)"
           >
         </form>
       </div>
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>

@@ -1,18 +1,17 @@
-/* eslint-disable*/
 import Vue from 'vue';
-import App from './App';
-import router from './router';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
-import store from './store/store';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faSpotify } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import interceptors from './services/interceptors';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSpotify } from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import store from './store/store';
+import router from './router';
+import App from './App';
 
-library.add(faSpotify)
+library.add(faSpotify);
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 UIkit.use(Icons);
 
@@ -20,10 +19,8 @@ Vue.config.productionTip = false;
 
 interceptors.setup(router, store);
 
-const app = new Vue({
-  el: '#app',
+new Vue({
   router,
   store,
-  components: { App },
-  template: '<App/>',
-});
+  render: h => h(App),
+}).$mount('#app');

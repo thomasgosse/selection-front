@@ -11,11 +11,10 @@ export default {
     axios.interceptors.response.use(
       response => response,
       (error) => {
-        if (error.response.data.error.message === 'The access token expired') {
-          console.log('expired token');
+        if (error.response.status === 401) {
+          UIkit.offcanvas('#offcanvas-push').hide();
+          store.commit('logout');
         }
-        UIkit.offcanvas('#offcanvas-push').hide();
-        store.commit('logout');
       },
     );
     axios.interceptors.request.use(

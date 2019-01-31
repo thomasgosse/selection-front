@@ -27,14 +27,18 @@ export default {
     ...mapState(['artist']),
   },
   beforeMount() {
-    this.getArtist(this.id);
+    this.updateArtist(this.id);
   },
   beforeRouteUpdate(to, from, next) {
-    this.getArtist(to.params.id);
+    this.updateArtist(to.params.id);
     next();
   },
   methods: {
     ...mapActions(['getArtist']),
+    updateArtist(id) {
+      this.getArtist(id)
+        .catch(() => this.$router.push({ path: '/' }));
+    },
   },
 };
 </script>

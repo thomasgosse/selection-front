@@ -1,19 +1,22 @@
 <template>
   <div
-    class="uk-container uk-container-large uk-padding"
+    class="uk-container uk-container-large uk-margin"
   >
     <article
       class="uk-article"
     >
-      <h1 class="uk-article-title">
+      <h1 class="black">
         {{ name }}
       </h1>
       <ArtworkList
-        title="Albums"
+        v-if="albums.length > 0"
+        title="albums"
         :items="albums"
       />
       <ArtworkList
-        title="Singles & EPs"
+        v-if="singles.length > 0"
+        class="uk-margin-top"
+        title="singles & EPs"
         :items="singles"
       />
     </article>

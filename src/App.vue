@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -14,6 +14,15 @@ export default {
   @import "../node_modules/uikit/src/less/uikit.theme.less";
 
   #app {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .black {
+    font-weight: 700;
+  }
+
+  .thin-italic {
+  font-weight: 100;
+  font-style: italic;
   }
 </style>

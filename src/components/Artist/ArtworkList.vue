@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="uk-article-title">
+    <h2 class="thin-italic">
       {{ title }}
     </h2>
     <div

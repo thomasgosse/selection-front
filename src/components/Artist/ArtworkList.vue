@@ -22,12 +22,18 @@
           >
           <div
             class="uk-transition-fade uk-position-cover
-                     uk-position-small uk-overlay uk-overlay-default
-                     uk-flex uk-flex-center uk-flex-middle"
+                   uk-position-small uk-overlay uk-overlay-default"
           >
-            <p class="uk-h4 uk-margin-remove">
-              {{ item.name }}
-            </p>
+            <div class="uk-text-center">
+              <p class="thin-italic uk-h4">
+                {{ item.name }}
+              </p>
+              <a
+                class="uk-transition-fade uk-icon-link"
+                uk-icon="icon: plus; ratio: 2"
+                @click="saveArtwork(item)"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -45,6 +51,10 @@ export default {
     },
     items: {
       type: Array,
+      required: true,
+    },
+    saveArtwork: {
+      type: Function,
       required: true,
     },
   },

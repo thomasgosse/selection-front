@@ -12,12 +12,14 @@
         v-if="albums.length > 0"
         title="albums"
         :items="albums"
+        :save-artwork="saveArtwork"
       />
       <ArtworkList
         v-if="singles.length > 0"
         class="uk-margin-top"
         title="singles & EPs"
         :items="singles"
+        :save-artwork="saveArtwork"
       />
     </article>
   </div>
@@ -42,6 +44,10 @@ export default {
     },
     singles: {
       type: Array,
+      required: true,
+    },
+    saveArtwork: {
+      type: Function,
       required: true,
     },
   },

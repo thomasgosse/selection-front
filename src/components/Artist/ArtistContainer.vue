@@ -4,6 +4,7 @@
     :name="artist.name"
     :albums="albums"
     :singles="singles"
+    :save-artwork="saveArtwork"
   />
 </template>
 
@@ -38,6 +39,9 @@ export default {
     updateArtist(id) {
       this.getArtist(id)
         .catch(() => this.$router.push({ path: '/' }));
+    },
+    saveArtwork(artwork) {
+      console.log(artwork);
     },
   },
 };

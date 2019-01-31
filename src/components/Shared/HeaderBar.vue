@@ -20,7 +20,6 @@
           src="@/assets/selection.png"
           class="logo"
         >
-        Selection
       </a>
     </div>
 

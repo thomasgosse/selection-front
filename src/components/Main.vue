@@ -1,9 +1,9 @@
 <template>
   <div>
-    <HeaderBarContainer :is-authorized="loggedIn"/>
-    <SearchBarContainer/>
-    <router-view v-if="loggedIn"/>
-    <HasNotRight v-else/>
+    <HeaderBarContainer :is-authorized="loggedIn" />
+    <SearchBarContainer />
+    <router-view v-if="loggedIn" />
+    <HasNotRight v-else />
   </div>
 </template>
 
@@ -25,13 +25,15 @@ export default {
     ...mapState(['loggedIn']),
   },
   beforeMount() {
-    getProfile().then((result) => {
-      const user = {
-        mainImage: result.images[0],
-        name: result.display_name,
-      };
-      this.$store.commit('user', user);
-    });
+    getProfile()
+      .then((result) => {
+        const user = {
+          mainImage: result.images[0],
+          name: result.display_name,
+        };
+        this.$store.commit('user', user);
+      })
+      .catch(error => console.log(error));
   },
 };
 </script>

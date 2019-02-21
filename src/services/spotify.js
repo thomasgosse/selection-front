@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export async function getSearchResult(search) {
   return axios
-    .get(`https://api.spotify.com/v1/search?q=${search}&type=artist`)
+    .get(`https://api.spotify.com/v1/search?q=${search}&type=artist,album`)
     .then(response => response.data);
 }
 

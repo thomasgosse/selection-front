@@ -1,50 +1,59 @@
 <template>
-  <ul uk-accordion="multiple: true">
-    <li class="uk-open">
-      <a
-        class="uk-accordion-title"
-        href="#"
-      >
-        Item 1
-      </a>
-      <table class="uk-table uk-accordion-content">
-        <tbody>
-          <tr
-            v-for="item in items"
-            :key="item.id"
+  <li class="uk-open">
+    <a class="uk-accordion-title">
+      {{ title }}
+    </a>
+    <table
+      v-if="items.length > 0"
+      class="uk-table uk-accordion-content"
+    >
+      <tbody>
+        <tr
+          v-for="item in items"
+          :key="item.id"
+        >
+          <td
+            uk-grid
+            class="artist uk-grid-small uk-child-width-expand@s uk-text-left"
+            @click="onClick(item)"
           >
-            <td
-              uk-grid
-              class="artist uk-grid-small uk-child-width-expand@s uk-text-left"
-              @click="onClick(item)"
-            >
-              <div class="uk-width-1-3@m">
-                <img
-                  :data-src="item.cover_image"
-                  class="uk-border-circle"
-                  uk-img
-                >
+            <div class="uk-width-1-3@m">
+              <img
+                :data-src="item.cover_image"
+                class="uk-border-circle"
+                uk-img
+              >
+            </div>
+            <div class="uk-width-2-3@m">
+              <div>
+                {{ item.name }}
               </div>
-              <div class="uk-width-2-3@m">
-                <div>
-                  {{ item.name }}
-                </div>
-                <div class="uk-text-meta">
-                  {{ item.type }}
-                </div>
+              <div class="uk-text-meta">
+                {{ item.type }}
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </li>
-  </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div
+      v-else
+      class="uk-table uk-accordion-content"
+    >
+      no items found
+    </div>
+  </li>
 </template>
 
 <script>
 export default {
   name: 'SearchBarList',
   props: {
+    title: {
+      type: String,
+      default: '',
+    },
     items: {
       type: Array,
       required: true,

@@ -3,6 +3,7 @@
     :on-change="search"
   >
     <SearchBarAccordions
+      :has-searched="hasSearched"
       :artists="artists"
       :albums="albums"
       :on-click-artist="onClickArtist"
@@ -29,6 +30,7 @@ export default {
     return {
       artists: [],
       albums: [],
+      hasSearched: false,
     };
   },
   methods: {
@@ -44,6 +46,7 @@ export default {
     search(search) {
       getSearchResult(search)
         .then((response) => {
+          this.hasSearched = true;
           const artistsAsItems = response.artists.items;
           const albumsAsItems = response.albums.items;
           this.artists = this.mapItems(artistsAsItems);

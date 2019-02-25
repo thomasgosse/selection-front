@@ -1,5 +1,6 @@
 <template>
   <ul
+    v-if="hasSearched"
     uk-accordion="multiple: true"
   >
     <SearchBarList
@@ -38,6 +39,10 @@ export default {
     },
     onClickAlbum: {
       type: Function,
+      required: true,
+    },
+    hasSearched: {
+      type: Boolean,
       required: true,
     },
   },

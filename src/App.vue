@@ -22,7 +22,7 @@ export default {
   }
 
   .thin-italic {
-  font-weight: 100;
-  font-style: italic;
+    font-weight: 100;
+    font-style: italic;
   }
 </style>

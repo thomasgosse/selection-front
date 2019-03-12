@@ -2,7 +2,7 @@
   <SearchBar
     :on-change="search"
   >
-    <SearchBarAccordions
+    <SearchBarCollapsibleLists
       :has-searched="hasSearched"
       :artists="artists"
       :albums="albums"
@@ -15,7 +15,7 @@
 <script>
 import UIkit from 'uikit';
 import SearchBar from '@/components/Search/SearchBar';
-import SearchBarAccordions from '@/components/Search/SearchBarAccordions';
+import SearchBarCollapsibleLists from '@/components/Search/SearchBarCollapsibleLists';
 import { getSearchResult } from '@/services/spotify';
 
 const defaultImage = require('@/assets/ghost-solid.svg');
@@ -24,7 +24,7 @@ export default {
   name: 'SearchBarContainer',
   components: {
     SearchBar,
-    SearchBarAccordions,
+    SearchBarCollapsibleLists,
   },
   data() {
     return {

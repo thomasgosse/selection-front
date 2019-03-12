@@ -28,15 +28,15 @@ export default {
     ...mapState(['artist']),
   },
   beforeMount() {
-    this.updateArtist(this.id);
+    this.retrieveArtist(this.id);
   },
   beforeRouteUpdate(to, from, next) {
-    this.updateArtist(to.params.id);
+    this.retrieveArtist(to.params.id);
     next();
   },
   methods: {
     ...mapActions(['getArtist']),
-    updateArtist(id) {
+    retrieveArtist(id) {
       this.getArtist(id)
         .catch(() => this.$router.push({ path: '/' }));
     },

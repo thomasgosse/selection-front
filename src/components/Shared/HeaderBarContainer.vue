@@ -3,7 +3,7 @@
     :on-click="goToHomePage"
     :on-logout="logout"
     :is-authorized="isAuthorized"
-    :profile-image="profileImage"
+    :profile-image="userImage"
   />
 </template>
 
@@ -24,15 +24,15 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['profileImage']),
+    ...mapGetters(['userImage']),
   },
   methods: {
     goToHomePage() {
-      this.$router.push({ path: '/' });
+      this.$router.push({ path: '/user' });
     },
     logout() {
-      this.$store.commit('logout');
-      this.$store.commit('token', '');
+      this.$store.commit('LOGOUT');
+      this.$store.commit('REMOVE_TOKEN');
       localStorage.removeItem('token');
       this.$router.push({ path: '/' });
     },

@@ -31,7 +31,7 @@
               <a
                 class="uk-transition-fade uk-icon-link"
                 uk-icon="icon: plus; ratio: 2"
-                @click="saveArtwork(item)"
+                @click="handleClick(item)"
               />
             </div>
           </div>
@@ -53,7 +53,7 @@ export default {
       type: Array,
       required: true,
     },
-    saveArtwork: {
+    handleClick: {
       type: Function,
       required: true,
     },

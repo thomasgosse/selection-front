@@ -12,14 +12,14 @@
         v-if="albums.length > 0"
         title="albums"
         :items="albums"
-        :save-artwork="saveArtwork"
+        :handle-click="handleClick"
       />
       <ArtworkList
         v-if="singles.length > 0"
         class="uk-margin-top"
         title="singles & EPs"
         :items="singles"
-        :save-artwork="saveArtwork"
+        :handle-click="handleClick"
       />
     </article>
   </div>
@@ -46,7 +46,7 @@ export default {
       type: Array,
       required: true,
     },
-    saveArtwork: {
+    handleClick: {
       type: Function,
       required: true,
     },

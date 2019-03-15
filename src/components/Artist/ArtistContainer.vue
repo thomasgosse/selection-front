@@ -2,21 +2,24 @@
   <Artist
     v-if="artist && artist.name"
     :name="artist.name"
-    :albums="albums"
-    :singles="singles"
-    :save-artwork="saveArtwork"
+    :albums="currentArtistAlbums"
+    :singles="currentArtistSingles"
+    :handle-click="handleClick"
   />
 </template>
 
 <script>
 import Artist from '@/components/Artist/Artist';
 import { mapActions, mapGetters, mapState } from 'vuex';
+import artworkUtils from '@/mixins/artworkUtils';
+import selectionService from '@/services/selection';
 
 export default {
   name: 'ArtistContainer',
   components: {
     Artist,
   },
+  mixins: [artworkUtils],
   props: {
     id: {
       type: String,
@@ -24,7 +27,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['albums', 'singles']),
+    ...mapGetters(['currentArtistAlbums', 'currentArtistSingles']),
     ...mapState(['artist']),
   },
   beforeMount() {
@@ -40,8 +43,10 @@ export default {
       this.getArtist(id)
         .catch(() => this.$router.push({ path: '/' }));
     },
-    saveArtwork(artwork) {
-      console.log(artwork);
+    handleClick(artwork) {
+      const { type, id } = artwork;
+      const builtArtwork = this.buildArtwork(artwork);
+      selectionService.saveUserArtwork(builtArtwork, '1', id, type);
     },
   },
 };

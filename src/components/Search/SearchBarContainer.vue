@@ -16,7 +16,7 @@
 import UIkit from 'uikit';
 import SearchBar from '@/components/Search/SearchBar';
 import SearchBarCollapsibleLists from '@/components/Search/SearchBarCollapsibleLists';
-import { getSearchResult } from '@/services/spotify';
+import spotifyService from '@/services/spotify';
 
 const defaultImage = require('@/assets/ghost-solid.svg');
 
@@ -44,7 +44,7 @@ export default {
       }));
     },
     search(search) {
-      getSearchResult(search)
+      spotifyService.getSearchResult(search)
         .then((response) => {
           this.hasSearched = true;
           const artistsAsItems = response.artists.items;

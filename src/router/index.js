@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Main from '@/components/Main';
 import Callback from '@/components/Callback';
 import ArtistContainer from '@/components/Artist/ArtistContainer';
+import UserContainer from '@/components/User/UserContainer';
 
 Vue.use(Router);
 
@@ -15,8 +16,14 @@ export default new Router({
       component: Main,
       children: [
         {
+          path: 'user',
+          name: 'UserPage',
+          component: UserContainer,
+          props: true,
+        },
+        {
           path: 'artist/:id',
-          name: 'ArtistContainer',
+          name: 'ArtistPage',
           component: ArtistContainer,
           props: true,
         },

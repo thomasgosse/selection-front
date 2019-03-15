@@ -12,7 +12,7 @@ import SearchBarContainer from '@/components/Search/SearchBarContainer';
 import HeaderBarContainer from '@/components/Shared/HeaderBarContainer';
 import HasNotRight from '@/components/HasNotRight';
 import { mapState } from 'vuex';
-import { getProfile } from '../services/spotify';
+import spotifyService from '@/services/spotify';
 
 export default {
   name: 'Main',
@@ -25,13 +25,13 @@ export default {
     ...mapState(['loggedIn']),
   },
   beforeMount() {
-    getProfile()
+    spotifyService.getProfile()
       .then((result) => {
         const user = {
           mainImage: result.images[0],
           name: result.display_name,
         };
-        this.$store.commit('user', user);
+        this.$store.commit('UPDATE_USER', user);
       })
       .catch(error => console.log(error));
   },

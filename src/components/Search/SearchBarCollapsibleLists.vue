@@ -20,7 +20,7 @@
 import SearchBarList from '@/components/Search/SearchBarList';
 
 export default {
-  name: 'SearchBarAccordions',
+  name: 'SearchBarCollapsibleLists',
   components: {
     SearchBarList,
   },

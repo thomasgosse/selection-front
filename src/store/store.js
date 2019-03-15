@@ -2,7 +2,8 @@
 
 import Vuex from 'vuex';
 import Vue from 'vue';
-import { getArtist } from '@/services/spotify';
+import spotifyService from '@/services/spotify';
+import selectionService from '@/services/selection'
 import _ from 'lodash';
 
 Vue.use(Vuex);
@@ -17,51 +18,65 @@ export default new Vuex.Store({
     },
     artist: {},
     artworks: {},
+    userArtworks: [],
   },
   mutations: {
-    login(state) {
+    LOGIN(state) {
       state.loggedIn = true;
     },
-    logout(state) {
+    LOGOUT(state) {
       state.loggedIn = false;
     },
-    token(state, token) {
+    SET_TOKEN(state, token) {
       state.token = token;
     },
-    user(state, user) {
+    REMOVE_TOKEN(state) {
+      state.token = 'token';
+    },
+    UPDATE_USER(state, user) {
       state.user = user;
     },
-    artist(state, artist) {
+    UPDATE_CURRENT_ARTIST(state, artist) {
       state.artist = artist;
     },
-    artworks(state, artworks) {
+    UPDATE_CURRENT_ARTWORK(state, artworks) {
       state.artworks = artworks;
+    },
+    UPDATE_USER_ARTWORKS(state, artworks) {
+      state.userArtworks = artworks;
     },
   },
   actions: {
     getArtist({ commit }, id) {
-      return getArtist(id)
+      return spotifyService.getArtist(id)
         .then((result) => {
-          commit('artist', result.artist);
-          commit('artworks', result.albums);
+          commit('UPDATE_CURRENT_ARTIST', result.artist);
+          commit('UPDATE_CURRENT_ARTWORK', result.albums);
+          return result;
+        });
+    },
+    getUserArtworksByType({ commit }, {userId, type}) {
+      return selectionService.getUserArtworksByType(userId, type)
+        .then((result) => {
+          commit('UPDATE_USER_ARTWORKS', result);
           return result;
         });
     },
   },
   getters: {
-    profileImage(state) {
+    userImage(state) {
       const image = state.user.mainImage.url;
       return image || '';
     },
-    albums(state) {
+     currentArtistAlbums(state) {
       const artworks = state.artworks.items;
       if(artworks) {
-        const alb = artworks.filter(album => album.album_type === 'album');
-        return _.uniqBy(alb, 'name');
+        const albums = artworks.filter(album => album.album_type === 'album');
+        return _.uniqBy(albums, 'name');
       }
       return [];
     },
-    singles(state) {
+    currentArtistSingles(state) {
       const artworks = state.artworks.items;
       if(artworks) {
         const singles = artworks.filter(album => album.album_type === 'single');

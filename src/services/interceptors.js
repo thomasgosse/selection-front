@@ -13,7 +13,7 @@ export default {
       (error) => {
         if (error.response.status === 401) {
           UIkit.offcanvas('#offcanvas-push').hide();
-          store.commit('logout');
+          store.commit('LOGOUT');
         }
       },
     );

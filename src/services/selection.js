@@ -7,6 +7,12 @@ export default class selectionService {
       .then(response => response.data);
   }
 
+  static async deleteUserArtwork(userId, artworkId, type) {
+    return axios
+      .delete(`http://localhost:3000/users/${userId}/${type}/${artworkId}`)
+      .then(response => response.data);
+  }
+
   static async getUserArtworksByType(userId, type) {
     return axios
       .get(`http://localhost:3000/users/${userId}/${type}`)

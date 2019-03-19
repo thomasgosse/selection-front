@@ -45,10 +45,10 @@ export default {
     },
     search(search) {
       spotifyService.getSearchResult(search)
-        .then((response) => {
+        .then((result) => {
           this.hasSearched = true;
-          const artistsAsItems = response.artists.items;
-          const albumsAsItems = response.albums.items;
+          const artistsAsItems = result.artists.items;
+          const albumsAsItems = result.albums.items;
           this.artists = this.mapItems(artistsAsItems);
           this.albums = this.mapItems(albumsAsItems);
         });

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!isLoading">
     <HeaderBarContainer :is-authorized="loggedIn" />
     <SearchBarContainer />
     <router-view v-if="loggedIn" />
@@ -21,6 +21,11 @@ export default {
     HeaderBarContainer,
     HasNotRight,
   },
+  data() {
+    return {
+      isLoading: true,
+    };
+  },
   computed: {
     ...mapState(['loggedIn']),
   },
@@ -30,10 +35,14 @@ export default {
         const user = {
           mainImage: result.images[0],
           name: result.display_name,
+          id: result.id,
         };
-        this.$store.commit('UPDATE_USER', user);
+        this.$store.commit('SET_USER', user);
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log('user not logged in', error))
+      .finally(() => {
+        this.isLoading = false;
+      });
   },
 };
 </script>

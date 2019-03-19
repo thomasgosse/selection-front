@@ -13,8 +13,9 @@ export default new Vuex.Store({
     loggedIn: true,
     token: localStorage.getItem('token'),
     user: {
-      mainImage: '',
+      mainImage: {},
       name: '',
+      id: '',
     },
     artist: {},
     artworks: {},
@@ -33,7 +34,7 @@ export default new Vuex.Store({
     REMOVE_TOKEN(state) {
       state.token = 'token';
     },
-    UPDATE_USER(state, user) {
+    SET_USER(state, user) {
       state.user = user;
     },
     UPDATE_CURRENT_ARTIST(state, artist) {
@@ -60,13 +61,17 @@ export default new Vuex.Store({
         .then((result) => {
           commit('UPDATE_USER_ARTWORKS', result);
           return result;
-        });
+        })
+        .catch((error) => console.log('error retrieving artworks', error));
     },
   },
   getters: {
     userImage(state) {
       const image = state.user.mainImage.url;
       return image || '';
+    },
+    userId(state) {
+      return state.user.id;
     },
      currentArtistAlbums(state) {
       const artworks = state.artworks.items;

@@ -9,7 +9,7 @@
         v-if="items.length > 0"
         title="Thomas Gosse's selection"
         :items="items"
-        :handle-click="() => {}"
+        :handle-click="handleClick"
       />
     </article>
   </div>
@@ -26,6 +26,10 @@ export default {
   props: {
     items: {
       type: Array,
+      required: true,
+    },
+    handleClick: {
+      type: Function,
       required: true,
     },
   },

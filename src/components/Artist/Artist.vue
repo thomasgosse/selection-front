@@ -13,6 +13,7 @@
         title="albums"
         :items="albums"
         :handle-click="handleClick"
+        icon="plus"
       />
       <ArtworkList
         v-if="singles.length > 0"
@@ -20,6 +21,7 @@
         title="singles & EPs"
         :items="singles"
         :handle-click="handleClick"
+        icon="plus"
       />
     </article>
   </div>

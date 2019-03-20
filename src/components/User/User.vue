@@ -10,6 +10,7 @@
         title="Thomas Gosse's selection"
         :items="items"
         :handle-click="handleClick"
+        icon="close"
       />
     </article>
   </div>

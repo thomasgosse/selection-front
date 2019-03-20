@@ -18,11 +18,12 @@
             @click="onClick(item)"
           >
             <div class="uk-width-1-3@m">
-              <img
-                :data-src="item.cover_image"
-                class="uk-border-circle"
-                uk-img
-              >
+              <div class="profile-picture">
+                <img
+                  :data-src="item.cover_image"
+                  uk-img
+                >
+              </div>
             </div>
             <div class="uk-width-2-3@m">
               <div>
@@ -35,13 +36,18 @@
           </td>
         </tr>
       </tbody>
+      <button
+        class="uk-button uk-button-default"
+        @click="setMaxItems"
+      >
+        +/- d'{{ title }}
+      </button>
     </table>
-
     <div
       v-else
       class="uk-table uk-accordion-content"
     >
-      no items found
+      Aucun résulats à votre recherche
     </div>
   </li>
 </template>
@@ -62,6 +68,10 @@ export default {
       type: Function,
       required: true,
     },
+    setMaxItems: {
+      type: Function,
+      required: true,
+    },
   },
 };
 </script>
@@ -76,8 +86,11 @@ export default {
   cursor: pointer;
 }
 
-.uk-border-circle {
-  width: 4rem;
-  height: 4rem;
+.profile-picture {
+    position:relative;
+    overflow:hidden;
+    border-radius: 50%;
+    height: 5rem;
+    width: 5rem;
 }
 </style>

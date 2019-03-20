@@ -4,14 +4,16 @@
     uk-accordion="multiple: true"
   >
     <SearchBarList
-      title="artists"
+      title="artistes"
       :items="artists"
       :on-click="onClickArtist"
+      :set-max-items="setMaxArtists"
     />
     <SearchBarList
       title="albums"
       :items="albums"
       :on-click="onClickAlbum"
+      :set-max-items="setMaxAlbums"
     />
   </ul>
 </template>
@@ -43,6 +45,14 @@ export default {
     },
     hasSearched: {
       type: Boolean,
+      required: true,
+    },
+    setMaxArtists: {
+      type: Function,
+      required: true,
+    },
+    setMaxAlbums: {
+      type: Function,
       required: true,
     },
   },

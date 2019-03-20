@@ -4,10 +4,12 @@
   >
     <SearchBarCollapsibleLists
       :has-searched="hasSearched"
-      :artists="artists"
-      :albums="albums"
+      :artists="filteredArtists"
+      :albums="filteredAlbums"
       :on-click-artist="onClickArtist"
       :on-click-album="onClickAlbum"
+      :set-max-albums="setMaxAlbums"
+      :set-max-artists="setMaxArtists"
     />
   </SearchBar>
 </template>
@@ -17,6 +19,7 @@ import UIkit from 'uikit';
 import SearchBar from '@/components/Search/SearchBar';
 import SearchBarCollapsibleLists from '@/components/Search/SearchBarCollapsibleLists';
 import spotifyService from '@/services/spotify';
+import { DEFAULT_MAX_ITEMS, MAX_DISPLAYABLE_ITEMS } from '@/helpers/constants';
 
 const defaultImage = require('@/assets/ghost-solid.svg');
 
@@ -31,9 +34,29 @@ export default {
       artists: [],
       albums: [],
       hasSearched: false,
+      maxArtists: DEFAULT_MAX_ITEMS,
+      maxAlbums: DEFAULT_MAX_ITEMS,
     };
   },
+  computed: {
+    filteredAlbums() {
+      return this.albums.filter((album, index) => index < this.maxAlbums);
+    },
+    filteredArtists() {
+      return this.artists.filter((artist, index) => index < this.maxArtists);
+    },
+  },
   methods: {
+    setMaxAlbums() {
+      this.maxAlbums = (this.maxAlbums === DEFAULT_MAX_ITEMS)
+        ? MAX_DISPLAYABLE_ITEMS
+        : DEFAULT_MAX_ITEMS;
+    },
+    setMaxArtists() {
+      this.maxArtists = (this.maxArtists === DEFAULT_MAX_ITEMS)
+        ? MAX_DISPLAYABLE_ITEMS
+        : DEFAULT_MAX_ITEMS;
+    },
     hasImage(images) {
       return images.length > 0;
     },

@@ -13,7 +13,7 @@ export default new Vuex.Store({
     loggedIn: true,
     token: localStorage.getItem('token'),
     user: {
-      mainImage: {},
+      mainImage: '',
       name: '',
       id: '',
     },
@@ -62,12 +62,11 @@ export default new Vuex.Store({
           commit('UPDATE_USER_ARTWORKS', result);
           return result;
         })
-        .catch((error) => console.log('error retrieving artworks', error));
     },
   },
   getters: {
     userImage(state) {
-      const image = state.user.mainImage.url;
+      const image = state.user.mainImage;
       return image || '';
     },
     userId(state) {

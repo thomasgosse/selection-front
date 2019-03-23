@@ -1,6 +1,5 @@
 <template>
   <HeaderBar
-    :on-click="goToHomePage"
     :on-logout="logout"
     :is-authorized="isAuthorized"
     :profile-image="userImage"
@@ -11,6 +10,8 @@
 <script>
 import HeaderBar from '@/components/Shared/HeaderBar';
 import { mapGetters } from 'vuex';
+import firebaseService from '@/services/firebase';
+import { sendNotification } from '@/helpers/uikit';
 
 export default {
   name: 'HeaderBarContainer',
@@ -27,14 +28,15 @@ export default {
     ...mapGetters(['userImage']),
   },
   methods: {
-    goToHomePage() {
-      this.$router.push({ path: '/user' });
-    },
     logout() {
-      this.$store.commit('LOGOUT');
-      this.$store.commit('REMOVE_TOKEN');
-      localStorage.removeItem('token');
-      this.$router.push({ path: '/' });
+      firebaseService.signOut()
+        .then(() => {
+          this.$store.commit('LOGOUT');
+          this.$store.commit('REMOVE_TOKEN');
+          localStorage.removeItem('token');
+          this.$router.push({ path: '/' });
+        })
+        .catch(() => sendNotification('La deconnexion a échouée', 'ban', 'danger'));
     },
   },
 };

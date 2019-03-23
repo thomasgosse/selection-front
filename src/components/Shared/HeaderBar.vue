@@ -14,7 +14,7 @@
       </ul>
       <a
         class="uk-navbar-item uk-logo"
-        @click="onClick"
+        @click="goToHomePage"
       >
         <img
           src="@/assets/selection.png"
@@ -52,9 +52,10 @@
     >
       <ul class="uk-navbar-nav">
         <a
-          :href="authorize"
           class="uk-icon-button"
           uk-icon="icon: user; ratio: 1.4"
+          uk-tooltip="title: Connectez vous !; pos: bottom-left"
+          @click="goToSignIn"
         />
       </ul>
     </div>
@@ -62,13 +63,11 @@
 </template>
 
 <script>
+import UIkit from 'uikit';
+
 export default {
   name: 'HeaderBar',
   props: {
-    onClick: {
-      type: Function,
-      required: true,
-    },
     onLogout: {
       type: Function,
       required: true,
@@ -82,14 +81,12 @@ export default {
       required: true,
     },
   },
-  computed: {
-    authorize() {
-      const baseUri = 'https://accounts.spotify.com/authorize';
-      const clientId = '906d6aec87c5496c8e466a84591bf3dc';
-      const responseType = 'token';
-      const redirectUri = 'http:%2F%2Flocalhost:8080%2Fcallback';
-      const scopes = 'user-read-private%20user-read-email%20user-read-birthdate';
-      return `${baseUri}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scopes}`;
+  methods: {
+    goToHomePage() {
+      this.$router.push({ path: '/user' });
+    },
+    goToSignIn() {
+      UIkit.switcher('#signInUp').show(0);
     },
   },
 };

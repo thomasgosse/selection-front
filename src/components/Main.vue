@@ -3,24 +3,27 @@
     <HeaderBarContainer :is-authorized="loggedIn" />
     <SearchBarContainer />
     <router-view v-if="loggedIn" />
-    <HasNotRight v-else />
+    <SignInUp v-else />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import firebaseService from '@/services/firebase';
+import { hideOffCanvas } from '@/helpers/uikit';
 import SearchBarContainer from '@/components/Search/SearchBarContainer';
 import HeaderBarContainer from '@/components/Shared/HeaderBarContainer';
-import HasNotRight from '@/components/HasNotRight';
-import { mapState } from 'vuex';
-import spotifyService from '@/services/spotify';
+import SignInUp from '@/components/Account/SignInUp';
+import userUtils from '@/mixins/userUtils';
 
 export default {
   name: 'Main',
   components: {
     SearchBarContainer,
     HeaderBarContainer,
-    HasNotRight,
+    SignInUp,
   },
+  mixins: [userUtils],
   data() {
     return {
       isLoading: true,
@@ -30,16 +33,15 @@ export default {
     ...mapState(['loggedIn']),
   },
   beforeMount() {
-    spotifyService.getProfile()
+    firebaseService.getUser()
       .then((result) => {
-        const user = {
-          mainImage: result.images[0],
-          name: result.display_name,
-          id: result.id,
-        };
+        const user = this.buildUser(result);
         this.$store.commit('SET_USER', user);
       })
-      .catch(error => console.log('user not logged in', error))
+      .catch(() => {
+        hideOffCanvas();
+        this.$store.commit('LOGOUT');
+      })
       .finally(() => {
         this.isLoading = false;
       });

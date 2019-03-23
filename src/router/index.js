@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Main from '@/components/Main';
-import Callback from '@/components/Callback';
 import ArtistContainer from '@/components/Artist/ArtistContainer';
 import UserContainer from '@/components/User/UserContainer';
 
@@ -28,11 +27,6 @@ export default new Router({
           props: true,
         },
       ],
-    },
-    {
-      path: '/callback',
-      name: 'Callback',
-      component: Callback,
     },
   ],
 });

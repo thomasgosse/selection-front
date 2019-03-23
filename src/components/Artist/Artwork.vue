@@ -63,8 +63,8 @@ export default {
   transition: filter 0.5s;
   will-change: filter;
   width: 300px;
-
 }
+
 .v-lazy-image-loaded {
   filter: blur(0);
   width: 300px;

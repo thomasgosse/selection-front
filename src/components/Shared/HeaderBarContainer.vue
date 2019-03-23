@@ -6,7 +6,6 @@
   />
 </template>
 
-
 <script>
 import HeaderBar from '@/components/Shared/HeaderBar';
 import { mapGetters } from 'vuex';

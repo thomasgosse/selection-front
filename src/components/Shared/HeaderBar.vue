@@ -54,12 +54,8 @@
         <a
           :href="authorize"
           class="uk-icon-button"
-        >
-          <font-awesome-icon
-            :icon="['fab', 'spotify']"
-            size="2x"
-          />
-        </a>
+          uk-icon="icon: user; ratio: 1.4"
+        />
       </ul>
     </div>
   </nav>

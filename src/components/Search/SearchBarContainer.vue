@@ -15,10 +15,10 @@
 </template>
 
 <script>
-import UIkit from 'uikit';
 import SearchBar from '@/components/Search/SearchBar';
 import SearchBarCollapsibleLists from '@/components/Search/SearchBarCollapsibleLists';
 import spotifyService from '@/services/spotify';
+import { toggleOffCanvas } from '@/helpers/uikit';
 import { DEFAULT_MAX_ITEMS, MAX_DISPLAYABLE_ITEMS } from '@/helpers/constants';
 
 const defaultImage = require('@/assets/ghost-solid.svg');
@@ -77,11 +77,11 @@ export default {
         });
     },
     onClickArtist(artist) {
-      UIkit.offcanvas('#offcanvas-push').toggle();
+      toggleOffCanvas();
       this.$router.push({ path: `/artist/${artist.id}` });
     },
     onClickAlbum(album) {
-      UIkit.offcanvas('#offcanvas-push').toggle();
+      toggleOffCanvas();
       const artistId = album.artists[0].id;
       this.$router.push({ path: `/artist/${artistId}` });
     },

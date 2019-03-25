@@ -25,39 +25,30 @@
         />
       </li>
       <li>
-        TODO
+        <SignUpForm />
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import firebaseService from '@/services/firebase';
-import { hideOffCanvas } from '@/helpers/uikit';
 import userUtils from '@/mixins/userUtils';
 import SignInForm from './SignInForm';
+import SignUpForm from './SignUpForm';
+import { mapActions } from 'vuex';
 
 export default {
-  name: 'SignInUp',
+  name: 'SignInUpContainer',
   components: {
     SignInForm,
+    SignUpForm,
   },
   mixins: [userUtils],
   methods: {
+    ...mapActions(['signIn']),
     submitSignIn(username, password) {
-      firebaseService.signIn(username, password)
-        .then(({ user }) => {
-          const builtUser = this.buildUser(user);
-          this.$store.commit('SET_USER', builtUser);
-          localStorage.setItem('token', user.ra);
-          this.$store.commit('SET_TOKEN', user.ra);
-          this.$store.commit('LOGIN');
-          this.$router.push({ path: '/user' });
-        })
-        .catch(() => {
-          hideOffCanvas();
-          this.$store.commit('LOGOUT');
-        });
+      this.signIn({ username, password })
+        .catch(err => console.log(err));
     },
   },
 };

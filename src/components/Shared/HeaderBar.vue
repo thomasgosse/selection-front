@@ -32,8 +32,6 @@
           :data-src="profileImage"
           class="uk-border-circle"
           uk-img
-          width="35"
-          height="35"
         >
       </a>
       <div uk-dropdown="mode: click">
@@ -83,7 +81,7 @@ export default {
   },
   methods: {
     goToHomePage() {
-      this.$router.push({ path: '/user' });
+      this.$router.push({ path: '/home' });
     },
     goToSignIn() {
       UIkit.switcher('#signInUp').show(0);
@@ -96,6 +94,11 @@ export default {
 .uk-icon-button {
   height: 3rem;
   width: 3rem;
+}
+
+.uk-border-circle {
+  height: 3rem;
+  width: 1.5rem;
 }
 
 .logo {

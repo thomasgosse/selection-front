@@ -15,15 +15,15 @@ export default class firebaseService {
     firebase.initializeApp(config);
   }
 
-  static async signIn(email, password) {
+  static signIn(email, password) {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
-  static async signOut() {
+  static signOut() {
     return firebase.auth().signOut();
   }
 
-  static async getUser() {
+  static getUser() {
     return new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {

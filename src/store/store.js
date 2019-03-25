@@ -4,7 +4,12 @@ import Vuex from 'vuex';
 import Vue from 'vue';
 import spotifyService from '@/services/spotify';
 import selectionService from '@/services/selection'
+import firebaseService from '@/services/firebase';
 import _ from 'lodash';
+import { hideOffCanvas, sendNotification } from '@/helpers/uikit';
+import userUtils from '@/mixins/userUtils';
+
+const defaultImage = require('@/assets/ghost-solid.svg');
 
 Vue.use(Vuex);
 
@@ -32,7 +37,7 @@ export default new Vuex.Store({
       state.token = token;
     },
     REMOVE_TOKEN(state) {
-      state.token = 'token';
+      state.token = '';
     },
     SET_USER(state, user) {
       state.user = user;
@@ -63,11 +68,36 @@ export default new Vuex.Store({
           return result;
         })
     },
+    signOut({ commit }) {
+      return firebaseService.signOut()
+        .then(() => {
+          localStorage.removeItem('token');
+          commit('LOGOUT');
+          commit('REMOVE_TOKEN');
+          hideOffCanvas();
+        })
+        .catch(() => sendNotification('La deconnexion a échouée', 'ban', 'danger'))
+    },
+    signIn({ commit }, { username, password }) {
+      return firebaseService.signIn(username, password)
+        .then((result) => {
+          const user = result.user;
+          const builtUser = userUtils.methods.buildUser(user);
+          localStorage.setItem('token', user.ra);
+          commit('SET_USER', builtUser);
+          commit('SET_TOKEN', user.ra);
+          commit('LOGIN');
+        })
+        .catch((error) => {
+          sendNotification('La connexion a échouée', 'ban', 'danger')
+          throw error
+        });
+    }
   },
   getters: {
     userImage(state) {
       const image = state.user.mainImage;
-      return image || '';
+      return defaultImage;
     },
     userId(state) {
       return state.user.id;

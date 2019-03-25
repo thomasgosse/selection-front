@@ -1,5 +1,11 @@
 <template>
-  <div class="uk-card uk-card-default uk-card-body uk-text-center">
+  <div
+    class="uk-card uk-card-default uk-card-body uk-text-center"
+    @keyup.enter="onSubmit(username, password)"
+  >
+    <h2 class="black">
+      Connexion à votre compte
+    </h2>
     <div class="uk-margin">
       <div class="uk-inline">
         <span
@@ -8,9 +14,9 @@
         />
         <input
           v-model="username"
-          class="uk-input uk-form-width-large"
+          class="uk-input uk-form-width-large thin-italic"
           type="text"
-          placeholder="E-mail address"
+          placeholder="Adresse e-mail"
         >
       </div>
     </div>
@@ -22,9 +28,9 @@
         />
         <input
           v-model="password"
-          class="uk-input uk-form-width-large"
+          class="uk-input uk-form-width-large thin-italic"
           type="password"
-          placeholder="Password"
+          placeholder="Mot de passe"
         >
       </div>
     </div>

@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { hideOffCanvas } from '@/helpers/uikit';
+import firebaseService from '@/services/firebase';
+
 
 function getToken() {
   const token = localStorage.getItem('token');
@@ -13,8 +15,12 @@ export default {
       (error) => {
         const { response } = error;
         if (response && response.status === 401) {
-          hideOffCanvas();
-          store.commit('LOGOUT');
+          firebaseService.signOut().then(() => {
+            localStorage.removeItem('token');
+            store.commit('LOGOUT');
+            store.commit('REMOVE_TOKEN');
+            hideOffCanvas();
+          });
         }
         throw error;
       },

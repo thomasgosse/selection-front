@@ -21,7 +21,8 @@ export default {
     ...mapGetters(['userId']),
   },
   mounted() {
-    this.getUserArtworksByType({ userId: this.userId, type: 'album' });
+    this.getUserArtworksByType({ userId: this.userId, type: 'album' })
+      .catch(() => sendNotification('Votre selection n\'a pas pu être récupérée', 'ban', 'danger'));
   },
   methods: {
     ...mapActions(['getUserArtworksByType']),

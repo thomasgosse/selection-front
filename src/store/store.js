@@ -2,7 +2,6 @@
 
 import Vuex from 'vuex';
 import Vue from 'vue';
-import spotifyService from '@/services/spotify';
 import selectionService from '@/services/selection'
 import firebaseService from '@/services/firebase';
 import _ from 'lodash';
@@ -54,7 +53,7 @@ export default new Vuex.Store({
   },
   actions: {
     getArtist({ commit }, id) {
-      return spotifyService.getArtist(id)
+      return selectionService.getArtist(id)
         .then((result) => {
           commit('UPDATE_CURRENT_ARTIST', result.artist);
           commit('UPDATE_CURRENT_ARTWORK', result.albums);

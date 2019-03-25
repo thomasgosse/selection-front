@@ -17,7 +17,7 @@
 <script>
 import SearchBar from '@/components/Search/SearchBar';
 import SearchBarCollapsibleLists from '@/components/Search/SearchBarCollapsibleLists';
-import spotifyService from '@/services/spotify';
+import selectionService from '@/services/selection';
 import { toggleOffCanvas } from '@/helpers/uikit';
 import { DEFAULT_MAX_ITEMS, MAX_DISPLAYABLE_ITEMS } from '@/helpers/constants';
 
@@ -67,7 +67,7 @@ export default {
       }));
     },
     search(search) {
-      spotifyService.getSearchResult(search)
+      selectionService.getSearchResult(search)
         .then((result) => {
           this.hasSearched = true;
           const artistsAsItems = result.artists.items;

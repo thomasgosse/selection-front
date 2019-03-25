@@ -8,9 +8,7 @@
 
 <script>
 import HeaderBar from '@/components/Shared/HeaderBar';
-import { mapGetters } from 'vuex';
-import firebaseService from '@/services/firebase';
-import { sendNotification } from '@/helpers/uikit';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'HeaderBarContainer',
@@ -27,15 +25,9 @@ export default {
     ...mapGetters(['userImage']),
   },
   methods: {
+    ...mapActions(['signOut']),
     logout() {
-      firebaseService.signOut()
-        .then(() => {
-          this.$store.commit('LOGOUT');
-          this.$store.commit('REMOVE_TOKEN');
-          localStorage.removeItem('token');
-          this.$router.push({ path: '/' });
-        })
-        .catch(() => sendNotification('La deconnexion a échouée', 'ban', 'danger'));
+      this.signOut();
     },
   },
 };

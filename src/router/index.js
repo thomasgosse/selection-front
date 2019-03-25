@@ -13,10 +13,11 @@ export default new Router({
       path: '/',
       name: 'Main',
       component: Main,
+      redirect: '/home',
       children: [
         {
-          path: 'user',
-          name: 'UserPage',
+          path: 'home',
+          name: 'HomePage',
           component: UserContainer,
           props: true,
         },

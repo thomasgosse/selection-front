@@ -3,17 +3,16 @@
     <HeaderBarContainer :is-authorized="loggedIn" />
     <SearchBarContainer />
     <router-view v-if="loggedIn" />
-    <SignInUp v-else />
+    <SignInUpContainer v-else />
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import firebaseService from '@/services/firebase';
-import { hideOffCanvas } from '@/helpers/uikit';
 import SearchBarContainer from '@/components/Search/SearchBarContainer';
 import HeaderBarContainer from '@/components/Shared/HeaderBarContainer';
-import SignInUp from '@/components/Account/SignInUp';
+import SignInUpContainer from '@/components/Account/SignInUpContainer';
 import userUtils from '@/mixins/userUtils';
 
 export default {
@@ -21,7 +20,7 @@ export default {
   components: {
     SearchBarContainer,
     HeaderBarContainer,
-    SignInUp,
+    SignInUpContainer,
   },
   mixins: [userUtils],
   data() {
@@ -39,12 +38,14 @@ export default {
         this.$store.commit('SET_USER', user);
       })
       .catch(() => {
-        hideOffCanvas();
-        this.$store.commit('LOGOUT');
+        this.signOut();
       })
       .finally(() => {
         this.isLoading = false;
       });
+  },
+  methods: {
+    ...mapActions(['signOut']),
   },
 };
 </script>

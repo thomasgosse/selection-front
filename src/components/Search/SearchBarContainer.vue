@@ -15,10 +15,10 @@
 </template>
 
 <script>
-import UIkit from 'uikit';
 import SearchBar from '@/components/Search/SearchBar';
 import SearchBarCollapsibleLists from '@/components/Search/SearchBarCollapsibleLists';
-import spotifyService from '@/services/spotify';
+import selectionService from '@/services/selection';
+import { toggleOffCanvas } from '@/helpers/uikit';
 import { DEFAULT_MAX_ITEMS, MAX_DISPLAYABLE_ITEMS } from '@/helpers/constants';
 
 const defaultImage = require('@/assets/ghost-solid.svg');
@@ -67,7 +67,7 @@ export default {
       }));
     },
     search(search) {
-      spotifyService.getSearchResult(search)
+      selectionService.getSearchResult(search)
         .then((result) => {
           this.hasSearched = true;
           const artistsAsItems = result.artists.items;
@@ -77,13 +77,14 @@ export default {
         });
     },
     onClickArtist(artist) {
-      UIkit.offcanvas('#offcanvas-push').toggle();
-      this.$router.push({ path: `/artist/${artist.id}` });
+      toggleOffCanvas();
+      this.$router.push({ path: `/artist/${artist.name}/${artist.id}` });
     },
     onClickAlbum(album) {
-      UIkit.offcanvas('#offcanvas-push').toggle();
+      toggleOffCanvas();
       const artistId = album.artists[0].id;
-      this.$router.push({ path: `/artist/${artistId}` });
+      const artistName = album.artists[0].name;
+      this.$router.push({ path: `/artist/${artistName}/${artistId}` });
     },
   },
 };

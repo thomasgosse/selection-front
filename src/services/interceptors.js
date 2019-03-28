@@ -1,6 +1,7 @@
 import axios from 'axios';
-import UIkit from 'uikit';
-import sendNotification from '@/helpers/notifications';
+import { hideOffCanvas } from '@/helpers/uikit';
+import firebaseService from '@/services/firebase';
+
 
 function getToken() {
   const token = localStorage.getItem('token');
@@ -14,9 +15,13 @@ export default {
       (error) => {
         const { response } = error;
         if (response && response.status === 401) {
-          if (UIkit.offcanvas('#offcanvas-push')) UIkit.offcanvas('#offcanvas-push').hide();
-          store.commit('LOGOUT');
-        } else sendNotification('Une erreur est survenue', 'ban', 'danger');
+          firebaseService.signOut().then(() => {
+            localStorage.removeItem('token');
+            store.commit('LOGOUT');
+            store.commit('REMOVE_TOKEN');
+            hideOffCanvas();
+          });
+        }
         throw error;
       },
     );

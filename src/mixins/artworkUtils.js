@@ -6,11 +6,11 @@ export default {
         releaseDate: artwork.release_date,
         type: artwork.type,
         id: artwork.id,
-        artists: this.buildArtist(artwork.artists),
+        artists: this.buildArtists(artwork.artists),
         images: artwork.images,
       };
     },
-    buildArtist(artists) {
+    buildArtists(artists) {
       return artists.map(artist => ({
         name: artist.name,
         id: artist.id,

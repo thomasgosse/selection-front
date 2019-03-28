@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Main from '@/components/Main';
-import Callback from '@/components/Callback';
 import ArtistContainer from '@/components/Artist/ArtistContainer';
 import UserContainer from '@/components/User/UserContainer';
 
@@ -14,25 +13,21 @@ export default new Router({
       path: '/',
       name: 'Main',
       component: Main,
+      redirect: '/home',
       children: [
         {
-          path: 'user',
-          name: 'UserPage',
+          path: 'home',
+          name: 'HomePage',
           component: UserContainer,
           props: true,
         },
         {
-          path: 'artist/:id',
+          path: 'artist/:name/:id',
           name: 'ArtistPage',
           component: ArtistContainer,
           props: true,
         },
       ],
-    },
-    {
-      path: '/callback',
-      name: 'Callback',
-      component: Callback,
     },
   ],
 });

@@ -18,4 +18,14 @@ export default class selectionService {
       .get(`http://localhost:3000/users/${userId}/${type}`)
       .then(response => response.data);
   }
+
+  static async getSearchResult(search) {
+    return axios.get(`http://localhost:3000/contents/search?query=${search}`)
+      .then(response => response.data);
+  }
+
+  static async getArtistAlbums(id) {
+    return axios.get(`http://localhost:3000/contents/artists/${id}/albums`)
+      .then(response => response.data);
+  }
 }

@@ -2,9 +2,13 @@
 
 import Vuex from 'vuex';
 import Vue from 'vue';
-import spotifyService from '@/services/spotify';
 import selectionService from '@/services/selection'
+import firebaseService from '@/services/firebase';
 import _ from 'lodash';
+import { hideOffCanvas, sendNotification } from '@/helpers/uikit';
+import userUtils from '@/mixins/userUtils';
+
+const defaultImage = require('@/assets/ghost-solid.svg');
 
 Vue.use(Vuex);
 
@@ -13,11 +17,10 @@ export default new Vuex.Store({
     loggedIn: true,
     token: localStorage.getItem('token'),
     user: {
-      mainImage: {},
+      mainImage: '',
       name: '',
       id: '',
     },
-    artist: {},
     artworks: {},
     userArtworks: [],
   },
@@ -32,13 +35,10 @@ export default new Vuex.Store({
       state.token = token;
     },
     REMOVE_TOKEN(state) {
-      state.token = 'token';
+      state.token = '';
     },
     SET_USER(state, user) {
       state.user = user;
-    },
-    UPDATE_CURRENT_ARTIST(state, artist) {
-      state.artist = artist;
     },
     UPDATE_CURRENT_ARTWORK(state, artworks) {
       state.artworks = artworks;
@@ -48,11 +48,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    getArtist({ commit }, id) {
-      return spotifyService.getArtist(id)
+    getArtistAlbums({ commit }, id) {
+      return selectionService.getArtistAlbums(id)
         .then((result) => {
-          commit('UPDATE_CURRENT_ARTIST', result.artist);
-          commit('UPDATE_CURRENT_ARTWORK', result.albums);
+          commit('UPDATE_CURRENT_ARTWORK', result);
           return result;
         });
     },
@@ -62,13 +61,37 @@ export default new Vuex.Store({
           commit('UPDATE_USER_ARTWORKS', result);
           return result;
         })
-        .catch((error) => console.log('error retrieving artworks', error));
     },
+    signOut({ commit }) {
+      return firebaseService.signOut()
+        .then(() => {
+          localStorage.removeItem('token');
+          commit('LOGOUT');
+          commit('REMOVE_TOKEN');
+          hideOffCanvas();
+        })
+        .catch(() => sendNotification('La deconnexion a échouée', 'ban', 'danger'))
+    },
+    signIn({ commit }, { username, password }) {
+      return firebaseService.signIn(username, password)
+        .then((result) => {
+          const user = result.user;
+          const builtUser = userUtils.methods.buildUser(user);
+          localStorage.setItem('token', user.ra);
+          commit('SET_USER', builtUser);
+          commit('SET_TOKEN', user.ra);
+          commit('LOGIN');
+        })
+        .catch((error) => {
+          sendNotification('La connexion a échouée', 'ban', 'danger')
+          throw error
+        });
+    }
   },
   getters: {
     userImage(state) {
-      const image = state.user.mainImage.url;
-      return image || '';
+      const image = state.user.mainImage;
+      return defaultImage;
     },
     userId(state) {
       return state.user.id;

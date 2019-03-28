@@ -20,17 +20,12 @@ export default class selectionService {
   }
 
   static async getSearchResult(search) {
-    return axios.get(`http://localhost:3000/artworks/search?q=${search}&type=artist,album`)
+    return axios.get(`http://localhost:3000/contents/search?query=${search}`)
       .then(response => response.data);
   }
 
-  static async getArtist(id) {
-    return axios.all([
-      axios.get(`http://localhost:3000/artists/${id}`),
-      axios.get(`http://localhost:3000/artists/${id}/albums?include_groups=album,single`),
-    ]).then(axios.spread((resultArtist, resultAlbums) => ({
-      artist: resultArtist.data,
-      albums: resultAlbums.data,
-    })));
+  static async getArtistAlbums(id) {
+    return axios.get(`http://localhost:3000/contents/artists/${id}/albums`)
+      .then(response => response.data);
   }
 }

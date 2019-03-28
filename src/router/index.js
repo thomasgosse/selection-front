@@ -22,7 +22,7 @@ export default new Router({
           props: true,
         },
         {
-          path: 'artist/:id',
+          path: 'artist/:name/:id',
           name: 'ArtistPage',
           component: ArtistContainer,
           props: true,

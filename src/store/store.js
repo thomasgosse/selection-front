@@ -21,7 +21,6 @@ export default new Vuex.Store({
       name: '',
       id: '',
     },
-    artist: {},
     artworks: {},
     userArtworks: [],
   },
@@ -41,9 +40,6 @@ export default new Vuex.Store({
     SET_USER(state, user) {
       state.user = user;
     },
-    UPDATE_CURRENT_ARTIST(state, artist) {
-      state.artist = artist;
-    },
     UPDATE_CURRENT_ARTWORK(state, artworks) {
       state.artworks = artworks;
     },
@@ -52,11 +48,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    getArtist({ commit }, id) {
-      return selectionService.getArtist(id)
+    getArtistAlbums({ commit }, id) {
+      return selectionService.getArtistAlbums(id)
         .then((result) => {
-          commit('UPDATE_CURRENT_ARTIST', result.artist);
-          commit('UPDATE_CURRENT_ARTWORK', result.albums);
+          commit('UPDATE_CURRENT_ARTWORK', result);
           return result;
         });
     },

@@ -22,7 +22,7 @@ export default {
   },
   mounted() {
     this.getUserArtworksByType({ userId: this.userId, type: 'album' })
-      .catch(() => sendNotification('Votre selection n\'a pas pu être récupérée', 'ban', 'danger'));
+      .catch(() => sendNotification('Vous n\'êtes plus connecté(e)', 'ban', 'warning'));
   },
   methods: {
     ...mapActions(['getUserArtworksByType']),

@@ -78,12 +78,13 @@ export default {
     },
     onClickArtist(artist) {
       toggleOffCanvas();
-      this.$router.push({ path: `/artist/${artist.id}` });
+      this.$router.push({ path: `/artist/${artist.name}/${artist.id}` });
     },
     onClickAlbum(album) {
       toggleOffCanvas();
       const artistId = album.artists[0].id;
-      this.$router.push({ path: `/artist/${artistId}` });
+      const artistName = album.artists[0].name;
+      this.$router.push({ path: `/artist/${artistName}/${artistId}` });
     },
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <Artist
-    v-if="artist && artist.name"
-    :name="artist.name"
+    v-if="name"
+    :name="name"
     :albums="currentArtistAlbums"
     :singles="currentArtistSingles"
     :handle-click="handleClick"
@@ -10,7 +10,7 @@
 
 <script>
 import Artist from '@/components/Artist/Artist';
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import artworkUtils from '@/mixins/artworkUtils';
 import selectionService from '@/services/selection';
 import { sendNotification } from '@/helpers/uikit';
@@ -26,10 +26,13 @@ export default {
       type: String,
       required: true,
     },
+    name: {
+      type: String,
+      required: true,
+    },
   },
   computed: {
     ...mapGetters(['currentArtistAlbums', 'currentArtistSingles', 'userId']),
-    ...mapState(['artist']),
   },
   beforeMount() {
     this.retrieveArtist(this.id);
@@ -39,9 +42,9 @@ export default {
     next();
   },
   methods: {
-    ...mapActions(['getArtist']),
+    ...mapActions(['getArtistAlbums']),
     retrieveArtist(id) {
-      this.getArtist(id)
+      this.getArtistAlbums(id)
         .catch(() => this.$router.push({ path: '/' }));
     },
     handleClick(artwork) {

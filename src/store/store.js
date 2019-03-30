@@ -14,7 +14,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    loggedIn: true,
+    loggedIn: false,
     token: localStorage.getItem('token'),
     user: {
       mainImage: '',
@@ -70,7 +70,7 @@ export default new Vuex.Store({
           commit('REMOVE_TOKEN');
           hideOffCanvas();
         })
-        .catch(() => sendNotification('La deconnexion a échouée', 'ban', 'danger'))
+        .catch(() => sendNotification('La deconnexion a échouée', 'ban', 'danger'));
     },
     signIn({ commit }, { username, password }) {
       return firebaseService.signIn(username, password)
@@ -83,8 +83,8 @@ export default new Vuex.Store({
           commit('LOGIN');
         })
         .catch((error) => {
-          sendNotification('La connexion a échouée', 'ban', 'danger')
-          throw error
+          sendNotification('La connexion a échouée', 'ban', 'danger');
+          throw error;
         });
     }
   },

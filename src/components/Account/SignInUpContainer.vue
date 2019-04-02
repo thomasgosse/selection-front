@@ -22,20 +22,26 @@
       <li>
         <SignInForm
           :on-submit="submitSignIn"
+          :is-loading="isLoading"
         />
       </li>
       <li>
-        <SignUpForm />
+        <SignUpForm
+          :on-submit="submitSignUp"
+          :is-loading="isLoading"
+        />
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import UIkit from 'uikit';
+import firebaseService from '@/services/firebase';
 import userUtils from '@/mixins/userUtils';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
-import { mapActions } from 'vuex';
 
 export default {
   name: 'SignInUpContainer',
@@ -44,11 +50,30 @@ export default {
     SignUpForm,
   },
   mixins: [userUtils],
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
   methods: {
     ...mapActions(['signIn']),
     submitSignIn(username, password) {
+      this.isLoading = true;
       this.signIn({ username, password })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err))
+        .finally(() => { this.isLoading = false; });
+    },
+    submitSignUp(username, password, name) {
+      this.isLoading = true;
+      firebaseService.signUp(username, password)
+        .then((result) => {
+          const { user } = result;
+          user.updateProfile({ displayName: name })
+            .then(() => { UIkit.switcher('#signInUp').show(0); })
+            .catch((error) => { console.log(error); });
+        })
+        .catch(err => console.log(err))
+        .finally(() => { this.isLoading = false; });
     },
   },
 };

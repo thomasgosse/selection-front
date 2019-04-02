@@ -86,6 +86,9 @@ export default new Vuex.Store({
           sendNotification('La connexion a échouée', 'ban', 'danger');
           throw error;
         });
+    },
+    signUp({ commit }, { username, password }) {
+      return firebaseService.signUp(username, password)
     }
   },
   getters: {

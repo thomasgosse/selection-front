@@ -19,6 +19,10 @@ export default class firebaseService {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
+  static async signUp(email, password) {
+    return firebase.auth().createUserWithEmailAndPassword(email, password);
+  }
+
   static async signOut() {
     return firebase.auth().signOut();
   }

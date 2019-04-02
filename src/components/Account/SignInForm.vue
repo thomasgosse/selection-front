@@ -40,6 +40,11 @@
     >
       Valider
     </button>
+    <div
+      v-if="isLoading"
+      uk-spinner
+      class="uk-margin-left"
+    />
   </div>
 </template>
 
@@ -49,6 +54,10 @@ export default {
   props: {
     onSubmit: {
       type: Function,
+      required: true,
+    },
+    isLoading: {
+      type: Boolean,
       required: true,
     },
   },

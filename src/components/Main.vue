@@ -36,6 +36,7 @@ export default {
       .then((result) => {
         const user = this.buildUser(result);
         this.$store.commit('SET_USER', user);
+        this.$store.commit('LOGIN');
       })
       .catch(() => {
         this.signOut();

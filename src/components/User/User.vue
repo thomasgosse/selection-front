@@ -7,7 +7,7 @@
     >
       <ArtworkList
         v-if="items.length > 0"
-        title="Thomas Gosse's selection"
+        :title="`${currentUser.name}\'s selection`"
         :items="items"
         :handle-click="handleClick"
         icon="close"
@@ -27,6 +27,10 @@ export default {
   props: {
     items: {
       type: Array,
+      required: true,
+    },
+    currentUser: {
+      type: Object,
       required: true,
     },
     handleClick: {

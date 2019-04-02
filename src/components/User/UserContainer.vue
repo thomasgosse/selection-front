@@ -2,6 +2,7 @@
   <User
     :items="userArtworks"
     :handle-click="handleClick"
+    :current-user="user"
   />
 </template>
 
@@ -17,12 +18,12 @@ export default {
     User,
   },
   computed: {
-    ...mapState(['userArtworks']),
+    ...mapState(['userArtworks', 'user']),
     ...mapGetters(['userId']),
   },
   mounted() {
     this.getUserArtworksByType({ userId: this.userId, type: 'album' })
-      .catch(() => sendNotification('Vous n\'êtes plus connecté(e)', 'ban', 'warning'));
+      .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'));
   },
   methods: {
     ...mapActions(['getUserArtworksByType']),

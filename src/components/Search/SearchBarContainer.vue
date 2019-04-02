@@ -18,7 +18,7 @@
 import SearchBar from '@/components/Search/SearchBar';
 import SearchBarCollapsibleLists from '@/components/Search/SearchBarCollapsibleLists';
 import selectionService from '@/services/selection';
-import { toggleOffCanvas } from '@/helpers/uikit';
+import { toggleOffCanvas, sendNotification } from '@/helpers/uikit';
 import { DEFAULT_MAX_ITEMS, MAX_DISPLAYABLE_ITEMS } from '@/helpers/constants';
 
 const defaultImage = require('@/assets/ghost-solid.svg');
@@ -74,7 +74,8 @@ export default {
           const albumsAsItems = result.albums.items;
           this.artists = this.mapItems(artistsAsItems);
           this.albums = this.mapItems(albumsAsItems);
-        });
+        })
+        .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'));
     },
     onClickArtist(artist) {
       toggleOffCanvas();

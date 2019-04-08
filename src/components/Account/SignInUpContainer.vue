@@ -20,15 +20,19 @@
 
     <ul class="uk-switcher uk-margin uk-margin-large-top">
       <li>
-        <SignInForm
+        <SignInUpForm
+          title="Connexion à votre compte"
           :on-submit="submitSignIn"
           :is-loading="isLoading"
+          :is-sign-up="false"
         />
       </li>
       <li>
-        <SignUpForm
+        <SignInUpForm
+          title="Creation d'un compte"
           :on-submit="submitSignUp"
           :is-loading="isLoading"
+          :is-sign-up="true"
         />
       </li>
     </ul>
@@ -40,14 +44,13 @@ import { mapActions } from 'vuex';
 import UIkit from 'uikit';
 import firebaseService from '@/services/firebase';
 import userUtils from '@/mixins/userUtils';
-import SignInForm from './SignInForm';
-import SignUpForm from './SignUpForm';
+import { sendNotification } from '@/helpers/uikit';
+import SignInUpForm from './SignInUpForm';
 
 export default {
   name: 'SignInUpContainer',
   components: {
-    SignInForm,
-    SignUpForm,
+    SignInUpForm,
   },
   mixins: [userUtils],
   data() {
@@ -60,7 +63,7 @@ export default {
     submitSignIn(username, password) {
       this.isLoading = true;
       this.signIn({ username, password })
-        .catch(err => console.log(err))
+        .catch(err => sendNotification(err.code, 'ban', 'danger'))
         .finally(() => { this.isLoading = false; });
     },
     submitSignUp(username, password, name) {
@@ -70,9 +73,9 @@ export default {
           const { user } = result;
           user.updateProfile({ displayName: name })
             .then(() => { UIkit.switcher('#signInUp').show(0); })
-            .catch((error) => { console.log(error); });
+            .catch(() => sendNotification('Votre pseudo n\'a pas pu être enregistré', 'ban', 'danger'));
         })
-        .catch(err => console.log(err))
+        .catch(err => sendNotification(err.code, 'ban', 'danger'))
         .finally(() => { this.isLoading = false; });
     },
   },

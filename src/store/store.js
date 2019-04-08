@@ -81,10 +81,6 @@ export default new Vuex.Store({
           commit('SET_USER', builtUser);
           commit('SET_TOKEN', user.ra);
           commit('LOGIN');
-        })
-        .catch((error) => {
-          sendNotification('La connexion a échouée', 'ban', 'danger');
-          throw error;
         });
     },
     signUp({ commit }, { username, password }) {

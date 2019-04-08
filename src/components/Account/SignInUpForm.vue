@@ -1,11 +1,28 @@
 <template>
   <div
     class="uk-card uk-card-default uk-card-body uk-text-center"
-    @keyup.enter="onSubmit(username, password)"
+    @keyup.enter="onSubmit(username, password, name)"
   >
     <h2 class="black">
-      Connexion à votre compte
+      {{ title }}
     </h2>
+    <div
+      v-if="isSignUp"
+      class="uk-margin"
+    >
+      <div class="uk-inline">
+        <span
+          class="uk-form-icon"
+          uk-icon="icon: user"
+        />
+        <input
+          v-model="name"
+          class="uk-input uk-form-width-large thin-italic"
+          type="text"
+          placeholder="Pseudonyme"
+        >
+      </div>
+    </div>
     <div class="uk-margin">
       <div class="uk-inline">
         <span
@@ -36,7 +53,7 @@
     </div>
     <button
       class="uk-button uk-button-default"
-      @click="onSubmit(username, password)"
+      @click="onSubmit(username, password, name)"
     >
       Valider
     </button>
@@ -50,14 +67,22 @@
 
 <script>
 export default {
-  name: 'SignInForm',
+  name: 'SignInUpForm',
   props: {
     onSubmit: {
       type: Function,
       required: true,
     },
+    isSignUp: {
+      type: Boolean,
+      required: true,
+    },
     isLoading: {
       type: Boolean,
+      required: true,
+    },
+    title: {
+      type: String,
       required: true,
     },
   },
@@ -65,6 +90,7 @@ export default {
     return {
       username: '',
       password: '',
+      name: '',
     };
   },
 };

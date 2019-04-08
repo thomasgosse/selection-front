@@ -15,14 +15,15 @@
           <td
             uk-grid
             class="artist uk-grid-small uk-child-width-expand@s uk-text-left"
+            uk-scrollspy="cls: uk-animation-fade; target: > .picture; delay: 100; repeat: false"
             @click="onClick(item)"
           >
-            <div class="uk-width-1-3@m">
+            <div class="uk-width-1-3@m picture">
               <div class="profile-picture">
-                <img
-                  :data-src="item.cover_image"
-                  uk-img
-                >
+                <v-lazy-image
+                  :src="item.cover_image"
+                  :src-placeholder="item.cover_image"
+                />
               </div>
             </div>
             <div class="uk-width-2-3@m">
@@ -37,7 +38,7 @@
         </tr>
       </tbody>
       <button
-        class="uk-button uk-button-default"
+        class="uk-button uk-button-default uk-margin-top"
         @click="setMaxItems"
       >
         +/- d'{{ title }}

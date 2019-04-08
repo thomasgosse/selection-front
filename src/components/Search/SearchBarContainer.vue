@@ -1,6 +1,7 @@
 <template>
   <SearchBar
     :on-change="search"
+    :is-loading="isLoading"
   >
     <SearchBarCollapsibleLists
       :has-searched="hasSearched"
@@ -36,6 +37,7 @@ export default {
       hasSearched: false,
       maxArtists: DEFAULT_MAX_ITEMS,
       maxAlbums: DEFAULT_MAX_ITEMS,
+      isLoading: false,
     };
   },
   computed: {
@@ -67,9 +69,11 @@ export default {
       }));
     },
     search(search) {
+      this.isLoading = true;
       selectionService.getSearchResult(search)
         .then((result) => {
           this.hasSearched = true;
+          this.isLoading = false;
           const artistsAsItems = result.artists.items;
           const albumsAsItems = result.albums.items;
           this.artists = this.mapItems(artistsAsItems);

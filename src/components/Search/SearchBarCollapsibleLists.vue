@@ -8,6 +8,7 @@
       :items="artists"
       :on-click="onClickArtist"
       :set-max-items="setMaxArtists"
+      radius="50"
     />
     <SearchBarList
       title="albums"

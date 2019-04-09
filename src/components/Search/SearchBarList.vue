@@ -19,7 +19,10 @@
             @click="onClick(item)"
           >
             <div class="uk-width-1-3@m picture">
-              <div class="profile-picture">
+              <div
+                class="item-picture"
+                :style="{ 'border-radius': radius + '%' }"
+              >
                 <v-lazy-image
                   :src="item.cover_image"
                   :src-placeholder="item.cover_image"
@@ -73,6 +76,10 @@ export default {
       type: Function,
       required: true,
     },
+    radius: {
+      type: String,
+      default: '0',
+    },
   },
 };
 </script>
@@ -87,10 +94,9 @@ export default {
   cursor: pointer;
 }
 
-.profile-picture {
+.item-picture {
     position:relative;
     overflow:hidden;
-    border-radius: 50%;
     height: 5rem;
     width: 5rem;
 }

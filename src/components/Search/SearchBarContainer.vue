@@ -70,13 +70,13 @@ export default {
         ? MAX_DISPLAYABLE_ITEMS
         : DEFAULT_MAX_ITEMS;
     },
-    mapSpotifyItems(items) {
+    mapMusicItems(items) {
       return items.map(item => ({
         ...item,
         cover_image: (item.images.length > 0) ? item.images[0].url : defaultImage,
       }));
     },
-    mapTmdbItems(items, type) {
+    mapMovieItems(items, type) {
       return items.map(item => ({
         ...item,
         cover_image: item.poster_path ? `https://image.tmdb.org/t/p/w154${item.poster_path}` : defaultImage,
@@ -89,9 +89,9 @@ export default {
         .then((result) => {
           this.hasSearched = true;
           this.isLoading = false;
-          this.artists = this.mapSpotifyItems(result.artists);
-          this.albums = this.mapSpotifyItems(result.albums);
-          this.tvshows = this.mapTmdbItems(result.tvshows, 'TV show');
+          this.artists = this.mapMusicItems(result.artists);
+          this.albums = this.mapMusicItems(result.albums);
+          this.tvshows = this.mapMovieItems(result.tvshows, 'TV show');
         })
         .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'));
     },

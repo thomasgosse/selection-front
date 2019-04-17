@@ -7,10 +7,11 @@
       :has-searched="hasSearched"
       :artists="filteredArtists"
       :albums="filteredAlbums"
-      :on-click-artist="onClickArtist"
-      :on-click-album="onClickAlbum"
+      :tvshows="filteredTVShows"
+      :on-click-item="onClickItem"
       :set-max-albums="setMaxAlbums"
       :set-max-artists="setMaxArtists"
+      :set-max-t-v-shows="setMaxTVShows"
     />
   </SearchBar>
 </template>
@@ -34,9 +35,11 @@ export default {
     return {
       artists: [],
       albums: [],
+      tvshows: [],
       hasSearched: false,
       maxArtists: DEFAULT_MAX_ITEMS,
       maxAlbums: DEFAULT_MAX_ITEMS,
+      maxTVShows: DEFAULT_MAX_ITEMS,
       isLoading: false,
     };
   },
@@ -46,6 +49,9 @@ export default {
     },
     filteredArtists() {
       return this.artists.filter((artist, index) => index < this.maxArtists);
+    },
+    filteredTVShows() {
+      return this.tvshows.filter((tvshow, index) => index < this.maxTVShows);
     },
   },
   methods: {
@@ -59,13 +65,22 @@ export default {
         ? MAX_DISPLAYABLE_ITEMS
         : DEFAULT_MAX_ITEMS;
     },
-    hasImage(images) {
-      return images.length > 0;
+    setMaxTVShows() {
+      this.maxTVShows = (this.maxTVShows === DEFAULT_MAX_ITEMS)
+        ? MAX_DISPLAYABLE_ITEMS
+        : DEFAULT_MAX_ITEMS;
     },
-    mapItems(items) {
+    mapSpotifyItems(items) {
       return items.map(item => ({
         ...item,
-        cover_image: this.hasImage(item.images) ? item.images[0].url : defaultImage,
+        cover_image: (item.images.length > 0) ? item.images[0].url : defaultImage,
+      }));
+    },
+    mapTmdbItems(items, type) {
+      return items.map(item => ({
+        ...item,
+        cover_image: item.poster_path ? `https://image.tmdb.org/t/p/w154${item.poster_path}` : defaultImage,
+        type,
       }));
     },
     search(search) {
@@ -74,22 +89,15 @@ export default {
         .then((result) => {
           this.hasSearched = true;
           this.isLoading = false;
-          const artistsAsItems = result.artists.items;
-          const albumsAsItems = result.albums.items;
-          this.artists = this.mapItems(artistsAsItems);
-          this.albums = this.mapItems(albumsAsItems);
+          this.artists = this.mapSpotifyItems(result.artists);
+          this.albums = this.mapSpotifyItems(result.albums);
+          this.tvshows = this.mapTmdbItems(result.tvshows, 'TV show');
         })
         .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'));
     },
-    onClickArtist(artist) {
+    onClickItem(item, type) {
       toggleOffCanvas();
-      this.$router.push({ path: `/artist/${artist.name}/${artist.id}` });
-    },
-    onClickAlbum(album) {
-      toggleOffCanvas();
-      const artistId = album.artists[0].id;
-      const artistName = album.artists[0].name;
-      this.$router.push({ path: `/artist/${artistName}/${artistId}` });
+      this.$router.push({ path: `/${type}/${item.name}/${item.id}` });
     },
   },
 };

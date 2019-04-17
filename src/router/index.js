@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Main from '@/components/Main';
 import ArtistContainer from '@/components/Artist/ArtistContainer';
+import TVShowDetailContainer from '@/components/Artwork/TVShowDetailContainer';
+import AlbumDetailContainer from '@/components/Artwork/AlbumDetailContainer';
 import UserContainer from '@/components/User/UserContainer';
 
 Vue.use(Router);
@@ -25,6 +27,18 @@ export default new Router({
           path: 'artist/:name/:id',
           name: 'ArtistPage',
           component: ArtistContainer,
+          props: true,
+        },
+        {
+          path: 'album/:name/:id',
+          name: 'AlbumPage',
+          component: AlbumDetailContainer,
+          props: true,
+        },
+        {
+          path: 'tvshow/:name/:id',
+          name: 'TVShowPage',
+          component: TVShowDetailContainer,
           props: true,
         },
       ],

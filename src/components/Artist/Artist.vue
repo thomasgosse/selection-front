@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import ArtworkList from '@/components/Artist/ArtworkList';
+import ArtworkList from '@/components/Artwork/ArtworkList';
 
 export default {
   name: 'Artist',

@@ -6,15 +6,24 @@
     <SearchBarList
       title="artistes"
       :items="artists"
-      :on-click="onClickArtist"
+      :on-click="onClickItem"
       :set-max-items="setMaxArtists"
+      type="artist"
       radius="50"
     />
     <SearchBarList
       title="albums"
       :items="albums"
-      :on-click="onClickAlbum"
+      :on-click="onClickItem"
       :set-max-items="setMaxAlbums"
+      type="album"
+    />
+    <SearchBarList
+      title="séries"
+      :items="tvshows"
+      :on-click="onClickItem"
+      :set-max-items="setMaxTVShows"
+      type="tvshow"
     />
   </ul>
 </template>
@@ -36,11 +45,11 @@ export default {
       type: Array,
       required: true,
     },
-    onClickArtist: {
-      type: Function,
+    tvshows: {
+      type: Array,
       required: true,
     },
-    onClickAlbum: {
+    onClickItem: {
       type: Function,
       required: true,
     },
@@ -53,6 +62,10 @@ export default {
       required: true,
     },
     setMaxAlbums: {
+      type: Function,
+      required: true,
+    },
+    setMaxTVShows: {
       type: Function,
       required: true,
     },

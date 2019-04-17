@@ -16,7 +16,7 @@
             uk-grid
             class="artist uk-grid-small uk-child-width-expand@s uk-text-left"
             uk-scrollspy="cls: uk-animation-fade; target: > .picture; delay: 100; repeat: false"
-            @click="onClick(item)"
+            @click="onClick(item, type)"
           >
             <div class="uk-width-1-3@m picture">
               <div
@@ -79,6 +79,10 @@ export default {
     radius: {
       type: String,
       default: '0',
+    },
+    type: {
+      type: String,
+      default: '',
     },
   },
 };

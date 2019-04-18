@@ -49,7 +49,7 @@ export default {
     },
     handleClick(artwork) {
       const { type, id } = artwork;
-      const builtArtwork = this.buildArtwork(artwork);
+      const builtArtwork = this.buildAlbum(artwork);
       selectionService.saveUserArtwork(builtArtwork, this.userId, id, type)
         .then((result) => {
           if (result.message === 'artwork.already.exists') sendNotification('L\'œuvre à déja été ajoutée', 'ban', 'warning');

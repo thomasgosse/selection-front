@@ -1,13 +1,13 @@
 export default {
   methods: {
-    buildArtwork(artwork) {
+    buildAlbum(album) {
       return {
-        name: artwork.name,
-        releaseDate: artwork.release_date,
-        type: artwork.type,
-        id: artwork.id,
-        artists: this.buildArtists(artwork.artists),
-        images: artwork.images,
+        name: album.name,
+        releaseDate: album.release_date,
+        type: album.type,
+        id: album.id,
+        artists: this.buildArtists(album.artists),
+        images: album.images,
       };
     },
     buildArtists(artists) {

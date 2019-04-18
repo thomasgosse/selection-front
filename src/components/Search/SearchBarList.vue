@@ -24,8 +24,8 @@
                 :style="{ 'border-radius': radius + '%' }"
               >
                 <v-lazy-image
-                  :src="item.cover_image"
-                  :src-placeholder="item.cover_image"
+                  :src="item.image"
+                  :src-placeholder="item.image"
                 />
               </div>
             </div>
@@ -34,7 +34,7 @@
                 {{ item.name }}
               </div>
               <div class="uk-text-meta">
-                {{ item.type }}
+                {{ item.typeLabel }}
               </div>
             </div>
           </td>

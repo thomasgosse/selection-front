@@ -81,12 +81,12 @@ export default {
       selectionService.getSearchResult(search)
         .then((result) => {
           this.hasSearched = true;
-          this.isLoading = false;
           this.artists = this.mapItems(result.artists);
           this.albums = this.mapItems(result.albums);
           this.tvshows = this.mapItems(result.tvshows);
         })
-        .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'));
+        .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'))
+        .finally(() => { this.isLoading = false; });
     },
     onClickItem(item, type) {
       toggleOffCanvas();

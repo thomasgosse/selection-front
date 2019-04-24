@@ -23,10 +23,7 @@
                 class="item-picture"
                 :style="{ 'border-radius': radius + '%' }"
               >
-                <v-lazy-image
-                  :src="item.image"
-                  :src-placeholder="item.image"
-                />
+                <v-lazy-image :src="item.image" />
               </div>
             </div>
             <div class="uk-width-2-3@m">

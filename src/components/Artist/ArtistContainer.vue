@@ -13,7 +13,6 @@ import Artist from '@/components/Artist/Artist';
 import { mapActions, mapGetters } from 'vuex';
 import artworkUtils from '@/mixins/artworkUtils';
 import selectionService from '@/services/selection';
-import { sendNotification } from '@/helpers/uikit';
 
 export default {
   name: 'ArtistContainer',
@@ -50,12 +49,7 @@ export default {
     handleClick(artwork) {
       const { type, id } = artwork;
       const builtArtwork = this.buildAlbum(artwork);
-      selectionService.saveUserArtwork(builtArtwork, this.userId, id, type)
-        .then((result) => {
-          if (result.message === 'artwork.already.exists') sendNotification('L\'œuvre à déja été ajoutée', 'ban', 'warning');
-          else sendNotification('L\'œuvre à été ajoutée avec succès', 'check', 'success');
-        })
-        .catch(() => sendNotification('L\'œuvre n\'a pas pu être sauvegardée', 'ban', 'danger'));
+      selectionService.saveUserArtwork(builtArtwork, this.userId, id, type);
     },
   },
 };

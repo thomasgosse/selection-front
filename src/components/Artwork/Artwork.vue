@@ -4,6 +4,7 @@
     tabindex="0"
   >
     <v-lazy-image
+      :style="{ width: `${width}px` }"
       :src="item.images[0].url"
       :src-placeholder="item.images[2].url"
     />
@@ -51,6 +52,10 @@ export default {
       type: String,
       required: true,
     },
+    width: {
+      type: String,
+      default: '300',
+    },
   },
 };
 </script>
@@ -62,11 +67,9 @@ export default {
   transform: scale(1);
   transition: filter 0.5s;
   will-change: filter;
-  width: 300px;
 }
 
 .v-lazy-image-loaded {
   filter: blur(0);
-  width: 300px;
 }
 </style>

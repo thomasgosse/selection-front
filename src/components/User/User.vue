@@ -5,13 +5,43 @@
     <article
       class="uk-article"
     >
-      <ArtworkList
-        v-if="items.length > 0"
-        :title="`${currentUser.name}\'s selection`"
-        :items="items"
-        :handle-click="handleClick"
-        icon="close"
-      />
+      <ul
+        id="artworks"
+        uk-tab
+        class="uk-child-width-expand@s uk-text-center"
+        uk-grid
+      >
+        <li>
+          <a>
+            Albums
+          </a>
+        </li>
+        <li>
+          <a>
+            Séries
+          </a>
+        </li>
+      </ul>
+      <ul class="uk-switcher uk-margin uk-margin-large-top">
+        <li>
+          <ArtworkList
+            v-if="albums.length > 0"
+            :title="`${currentUser.name}\'s selection`"
+            :items="albums"
+            :handle-click="handleClick"
+            icon="close"
+          />
+        </li>
+        <li>
+          <ArtworkList
+            v-if="tvshows.length > 0"
+            :title="`${currentUser.name}\'s selection`"
+            :items="tvshows"
+            :handle-click="handleClick"
+            icon="close"
+          />
+        </li>
+      </ul>
     </article>
   </div>
 </template>
@@ -25,7 +55,11 @@ export default {
     ArtworkList,
   },
   props: {
-    items: {
+    albums: {
+      type: Array,
+      required: true,
+    },
+    tvshows: {
       type: Array,
       required: true,
     },

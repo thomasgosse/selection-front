@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Main from '@/components/Main';
 import ArtistContainer from '@/components/Artist/ArtistContainer';
-import TVShowDetailContainer from '@/components/Artwork/TVShowDetailContainer';
+import TVShowDetailContainer from '@/components/Artwork/TVShow/TVShowDetailContainer';
 import AlbumDetailContainer from '@/components/Artwork/AlbumDetailContainer';
 import UserContainer from '@/components/User/UserContainer';
 

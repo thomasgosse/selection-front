@@ -25,4 +25,8 @@ export default {
     font-weight: 100;
     font-style: italic;
   }
+
+  .thin {
+    font-weight: 100;
+  }
 </style>

@@ -16,5 +16,14 @@ export default {
         id: artist.id,
       }));
     },
+    buildTVShow(tvshow) {
+      return {
+        name: tvshow.name,
+        releaseDate: tvshow.releaseDate,
+        type: tvshow.type,
+        id: tvshow.id,
+        images: tvshow.images,
+      };
+    },
   },
 };

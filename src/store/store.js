@@ -21,7 +21,8 @@ export default new Vuex.Store({
       name: '',
       id: '',
     },
-    musicArtworks: [],
+    currentMusicArtworks: [],
+    currentTVShowDetail: {},
     userArtworks: [],
   },
   mutations: {
@@ -40,8 +41,11 @@ export default new Vuex.Store({
     SET_USER(state, user) {
       state.user = user;
     },
-    UPDATE_CURRENT_ARTWORK(state, artworks) {
-      state.musicArtworks = artworks;
+    UPDATE_CURRENT_MUSIC_ARTWORK(state, artworks) {
+      state.currentMusicArtworks = artworks;
+    },
+    UPDATE_CURRENT_TVSHOW_DETAIL(state, detail) {
+      state.currentTVShowDetail = detail;
     },
     UPDATE_USER_ARTWORKS(state, artworks) {
       state.userArtworks = artworks;
@@ -51,9 +55,16 @@ export default new Vuex.Store({
     getArtistAlbums({ commit }, id) {
       return selectionService.getArtistAlbums(id)
         .then((result) => {
-          commit('UPDATE_CURRENT_ARTWORK', result);
+          commit('UPDATE_CURRENT_MUSIC_ARTWORK', result);
           return result;
         });
+    },
+    getTVShowDetail({ commit }, id) {
+      return selectionService.getTVShowDetail(id)
+      .then((result) => {
+        commit('UPDATE_CURRENT_TVSHOW_DETAIL', result);
+        return result;
+      });
     },
     getUserArtworksByType({ commit }, {userId, type}) {
       return selectionService.getUserArtworksByType(userId, type)
@@ -96,7 +107,7 @@ export default new Vuex.Store({
       return state.user.id;
     },
     currentArtistAlbums(state) {
-      const artworks = state.musicArtworks;
+      const artworks = state.currentMusicArtworks;
       if(artworks) {
         const albums = artworks.filter(album => album.album_type === 'album');
         return _.uniqBy(albums, 'name');
@@ -104,7 +115,7 @@ export default new Vuex.Store({
       return [];
     },
     currentArtistSingles(state) {
-      const artworks = state.musicArtworks;
+      const artworks = state.currentMusicArtworks;
       if(artworks) {
         const singles = artworks.filter(album => album.album_type === 'single');
         return _.uniqBy(singles, 'name');

@@ -20,9 +20,14 @@
           {{ item.name | shortenName }}
         </p>
         <a
-          class="uk-transition-fade uk-icon-link"
+          class="uk-transition-fade uk-icon-link uk-margin-right"
           :uk-icon="`icon: ${icon}; ratio: 2`"
           @click="handleClick(item)"
+        />
+        <a
+          class="uk-transition-fade uk-icon-link"
+          :uk-icon="`icon: more; ratio: 2`"
+          @click="goToDetail(item)"
         />
       </div>
     </div>
@@ -55,6 +60,12 @@ export default {
     width: {
       type: String,
       default: '300',
+    },
+  },
+  methods: {
+    goToDetail(artwork) {
+      const { id, name, type } = artwork;
+      this.$router.push({ path: `/${type}/${name}/${id}` });
     },
   },
 };

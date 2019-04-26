@@ -23,6 +23,7 @@ export default new Vuex.Store({
     },
     currentMusicArtworks: [],
     currentTVShowDetail: {},
+    currentAlbumDetail: {},
   },
   mutations: {
     LOGIN(state) {
@@ -46,6 +47,9 @@ export default new Vuex.Store({
     UPDATE_CURRENT_TVSHOW_DETAIL(state, detail) {
       state.currentTVShowDetail = detail;
     },
+    UPDATE_CURRENT_ALBUM_DETAIL(state, detail) {
+      state.currentAlbumDetail = detail;
+    }
   },
   actions: {
     getArtistAlbums({ commit }, id) {
@@ -59,6 +63,13 @@ export default new Vuex.Store({
       return selectionService.getTVShowDetail(id)
       .then((result) => {
         commit('UPDATE_CURRENT_TVSHOW_DETAIL', result);
+        return result;
+      });
+    },
+    getAlbumDetail({ commit }, id) {
+      return selectionService.getAlbumDetail(id)
+      .then((result) => {
+        commit('UPDATE_CURRENT_ALBUM_DETAIL', result);
         return result;
       });
     },

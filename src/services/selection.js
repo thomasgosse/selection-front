@@ -39,4 +39,9 @@ export default class selectionService {
     return axios.get(`http://localhost:3000/contents/tvshow/${id}`)
       .then(response => response.data);
   }
+
+  static async getAlbumDetail(id) {
+    return axios.get(`http://localhost:3000/contents/album/${id}`)
+      .then(response => response.data);
+  }
 }

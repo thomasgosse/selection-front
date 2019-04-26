@@ -4,7 +4,11 @@ import { sendNotification } from '@/helpers/uikit';
 export default class selectionService {
   static async saveUserArtwork(artwork, userId, artworkId, type) {
     return axios
-      .post(`http://localhost:3000/users/${userId}/${type}/${artworkId}`, artwork)
+      .post(`http://localhost:3000/users/${userId}/${type}/${artworkId}`, {
+        timestamp: Date.now(),
+        addedYear: new Date().getFullYear().toString(),
+        ...artwork,
+      })
       .then(response => response.data)
       .then((result) => {
         if (result.message === 'artwork.already.exists') sendNotification('L\'œuvre à déja été ajoutée', 'ban', 'warning');

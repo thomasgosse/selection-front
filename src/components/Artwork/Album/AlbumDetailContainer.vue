@@ -1,6 +1,6 @@
 <template>
   <AlbumDetail
-    v-if="currentAlbumDetail.name"
+    v-if="!isLoading"
     :detail="currentAlbumDetail"
     :handle-click="handleClick"
   />
@@ -24,16 +24,26 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      isLoading: true,
+    };
+  },
   computed: {
     ...mapState(['currentAlbumDetail']),
     ...mapGetters(['userId']),
   },
   beforeMount() {
-    this.getAlbumDetail(this.id);
+    this.getAlbumDetail(this.id)
+      .finally(() => { this.isLoading = false; });
   },
   beforeRouteUpdate(to, from, next) {
-    this.getAlbumDetail(to.params.id);
-    next();
+    this.isLoading = true;
+    this.getAlbumDetail(to.params.id)
+      .finally(() => {
+        this.isLoading = false;
+        next();
+      });
   },
   methods: {
     ...mapActions(['getAlbumDetail']),

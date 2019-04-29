@@ -4,7 +4,7 @@
     tabindex="0"
   >
     <v-lazy-image
-      :style="{ width: `${width}px` }"
+      :style="{ width: `${imageWidth}px` }"
       :src="item.images[0].url"
       :src-placeholder="item.images[2].url"
     />
@@ -16,8 +16,9 @@
         <p
           class="thin-italic"
           :uk-tooltip="item.name"
+          :style="`font-size: ${fontSize}rem`"
         >
-          {{ item.name | shortenName }}
+          {{ item.name | shortenName(imageWidth) }}
         </p>
         <a
           class="uk-transition-fade uk-icon-link uk-margin-right"
@@ -35,13 +36,14 @@
 </template>
 
 <script>
-import { MAX_NAME_LENGTH } from '@/helpers/constants';
+import { MAX_NAME_RA_LENGTH, MAX_NAME_SMA_LENGTH } from '@/helpers/constants';
 
 export default {
   name: 'Artwork',
   filters: {
-    shortenName(name) {
-      return (name.length > MAX_NAME_LENGTH) ? `${name.substring(0, MAX_NAME_LENGTH)}...` : name;
+    shortenName(name, imageWidth) {
+      const maxNameLength = (imageWidth > '300') ? MAX_NAME_RA_LENGTH : MAX_NAME_SMA_LENGTH;
+      return (name.length > maxNameLength) ? `${name.substring(0, maxNameLength)}...` : name;
     },
   },
   props: {
@@ -57,9 +59,13 @@ export default {
       type: String,
       required: true,
     },
-    width: {
+    imageWidth: {
       type: String,
       default: '300',
+    },
+    fontSize: {
+      type: String,
+      default: '1',
     },
   },
   methods: {

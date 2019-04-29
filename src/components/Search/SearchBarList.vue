@@ -21,7 +21,7 @@
             <div class="uk-width-1-3@m picture">
               <div
                 class="item-picture"
-                :style="{ 'border-radius': radius + '%' }"
+                :style="{ 'border-radius': radius + '%', height: imagesHeight + 'rem' }"
               >
                 <v-lazy-image :src="item.image" />
               </div>
@@ -77,6 +77,10 @@ export default {
       type: String,
       default: '0',
     },
+    imagesHeight: {
+      type: String,
+      default: '5',
+    },
     type: {
       type: String,
       default: '',
@@ -98,7 +102,6 @@ export default {
 .item-picture {
     position:relative;
     overflow:hidden;
-    height: 5rem;
     width: 5rem;
 }
 </style>

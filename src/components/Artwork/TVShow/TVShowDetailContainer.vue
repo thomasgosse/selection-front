@@ -1,6 +1,6 @@
 <template>
   <TVShowDetail
-    v-if="currentTVShowDetail.name"
+    v-if="!isLoading"
     :detail="currentTVShowDetail"
     :handle-click="handleClick"
   />
@@ -24,16 +24,26 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      isLoading: true,
+    };
+  },
   computed: {
     ...mapState(['currentTVShowDetail']),
     ...mapGetters(['userId']),
   },
   beforeMount() {
-    this.getTVShowDetail(this.id);
+    this.getTVShowDetail(this.id)
+      .finally(() => { this.isLoading = false; });
   },
   beforeRouteUpdate(to, from, next) {
-    this.getTVShowDetail(to.params.id);
-    next();
+    this.isLoading = true;
+    this.getTVShowDetail(to.params.id)
+      .finally(() => {
+        this.isLoading = false;
+        next();
+      });
   },
   methods: {
     ...mapActions(['getTVShowDetail']),

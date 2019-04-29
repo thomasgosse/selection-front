@@ -24,6 +24,7 @@
       :on-click="onClickItem"
       :set-max-items="setMaxTVShows"
       type="tvshow"
+      images-height="7.5"
     />
   </ul>
 </template>

@@ -28,7 +28,8 @@
           :item="detail"
           :handle-click="handleClick"
           icon="plus"
-          width="500"
+          image-width="500"
+          font-size="1.5"
         />
         <div class="uk-margin-top thin">
           © {{ detail.label }}

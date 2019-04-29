@@ -19,7 +19,8 @@
           :item="detail"
           :handle-click="handleClick"
           icon="plus"
-          width="500"
+          font-size="1.5"
+          image-width="500"
         />
       </div>
       <div class="uk-width-2-3@m">

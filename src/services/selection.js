@@ -5,7 +5,7 @@ export default class selectionService {
   static async saveUserArtwork(artwork, userId, artworkId, type) {
     return axios
       .post(`http://localhost:3000/users/${userId}/${type}/${artworkId}`, {
-        timestamp: Date.now(),
+        timestamp: -Date.now(),
         addedYear: new Date().getFullYear().toString(),
         ...artwork,
       })
@@ -23,9 +23,9 @@ export default class selectionService {
       .then(response => response.data);
   }
 
-  static async getUserArtworksByType(userId, type) {
+  static async getUserArtworksByType(userId, type, startAfter) {
     return axios
-      .get(`http://localhost:3000/users/${userId}/${type}`)
+      .get(`http://localhost:3000/users/${userId}/${type}?limit=20&startAfter=${startAfter}`)
       .then(response => response.data);
   }
 
@@ -46,6 +46,11 @@ export default class selectionService {
 
   static async getAlbumDetail(id) {
     return axios.get(`http://localhost:3000/contents/album/${id}`)
+      .then(response => response.data);
+  }
+
+  static async getArtworksCount(id, type) {
+    return axios.get(`http://localhost:3000/users/${id}/${type}/count`)
       .then(response => response.data);
   }
 }

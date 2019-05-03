@@ -24,6 +24,7 @@ export default new Vuex.Store({
     currentMusicArtworks: [],
     currentTVShowDetail: {},
     currentAlbumDetail: {},
+    artworkCounts: {},
   },
   mutations: {
     LOGIN(state) {
@@ -49,6 +50,9 @@ export default new Vuex.Store({
     },
     UPDATE_CURRENT_ALBUM_DETAIL(state, detail) {
       state.currentAlbumDetail = detail;
+    },
+    UPDATE_ARTWORK_COUNTS(state, { type, count }) {
+      state.artworkCounts[type] = count;
     }
   },
   actions: {
@@ -73,9 +77,15 @@ export default new Vuex.Store({
         return result;
       });
     },
-    getUserArtworksByType({ commit }, {userId, type}) {
-      return selectionService.getUserArtworksByType(userId, type)
+    getUserArtworksByType({ commit }, {userId, type, startAfter}) {
+      return selectionService.getUserArtworksByType(userId, type, startAfter)
         .then((result) => result)
+    },
+    getArtworksCount({ commit }, {userId, type}) {
+      return selectionService.getArtworksCount(userId, type)
+        .then((result) => {
+          commit('UPDATE_ARTWORK_COUNTS', { type, count: result.artworkCount })
+        });
     },
     signOut({ commit }) {
       return firebaseService.signOut()

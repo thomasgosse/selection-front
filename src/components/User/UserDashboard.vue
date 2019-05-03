@@ -1,10 +1,6 @@
 <template>
-  <div
-    class="uk-container uk-container-large uk-margin"
-  >
-    <article
-      class="uk-article"
-    >
+  <div class="uk-container uk-container-large uk-margin">
+    <article class="uk-article">
       <ul
         id="artworks"
         uk-tab
@@ -31,6 +27,19 @@
             :handle-click="handleClick"
             icon="close"
           />
+          <div class="uk-flex uk-flex-center uk-margin-top">
+            <button
+              v-if="!isLoading"
+              class="uk-button uk-button-default circle-btn"
+              @click="getNextAlbumPage()"
+            >
+              <span uk-icon="plus" />
+            </button>
+            <div
+              v-else
+              uk-spinner
+            />
+          </div>
         </li>
         <li>
           <ArtworkList
@@ -40,6 +49,19 @@
             :handle-click="handleClick"
             icon="close"
           />
+          <div class="uk-flex uk-flex-center uk-margin-top">
+            <button
+              v-if="!isLoading"
+              class="uk-button uk-button-default circle-btn"
+              @click="getNextTvshowPage()"
+            >
+              <span uk-icon="plus" />
+            </button>
+            <div
+              v-else
+              uk-spinner
+            />
+          </div>
         </li>
       </ul>
     </article>
@@ -50,7 +72,7 @@
 import ArtworkList from '@/components/Artwork/ArtworkList';
 
 export default {
-  name: 'User',
+  name: 'UserDashboard',
   components: {
     ArtworkList,
   },
@@ -71,6 +93,24 @@ export default {
       type: Function,
       required: true,
     },
+    getNextTvshowPage: {
+      type: Function,
+      required: true,
+    },
+    getNextAlbumPage: {
+      type: Function,
+      required: true,
+    },
+    isLoading: {
+      type: Boolean,
+      required: true,
+    },
   },
 };
 </script>
+
+<style scopped>
+.circle-btn {
+  border-radius: 50px;
+}
+</style>

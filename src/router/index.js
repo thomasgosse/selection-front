@@ -4,7 +4,7 @@ import Main from '@/components/Main';
 import ArtistContainer from '@/components/Artist/ArtistContainer';
 import TVShowDetailContainer from '@/components/Artwork/TVShow/TVShowDetailContainer';
 import AlbumDetailContainer from '@/components/Artwork/Album/AlbumDetailContainer';
-import UserContainer from '@/components/User/UserContainer';
+import UserDashboardContainer from '@/components/User/UserDashboardContainer';
 
 Vue.use(Router);
 
@@ -20,7 +20,7 @@ export default new Router({
         {
           path: 'home',
           name: 'HomePage',
-          component: UserContainer,
+          component: UserDashboardContainer,
           props: true,
         },
         {

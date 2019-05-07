@@ -39,7 +39,7 @@ export default {
         this.userAlbums = result.albums;
         this.userTVShows = result.tvshows;
       })
-      .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'));
+      .catch(() => sendNotification('Erreur lors de la connexion au serveur', 'ban', 'warning'));
   },
   methods: {
     ...mapActions(['getAllFirstsUserArtworks', 'getUserArtworksByType', 'getArtworksCounts']),
@@ -59,7 +59,7 @@ export default {
         .then((nextPage) => {
           this[collectionName] = this[collectionName].concat(nextPage);
         })
-        .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'))
+        .catch(() => sendNotification('Erreur lors de la connexion au serveur', 'ban', 'warning'))
         .finally(() => {
           this.isLoading = false;
         });

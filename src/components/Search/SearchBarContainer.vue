@@ -85,7 +85,7 @@ export default {
           this.albums = this.mapItems(result.albums);
           this.tvshows = this.mapItems(result.tvshows);
         })
-        .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'))
+        .catch(() => sendNotification('Erreur lors de la connexion au serveur', 'ban', 'warning'))
         .finally(() => { this.isLoading = false; });
     },
     onClickItem(item, type) {

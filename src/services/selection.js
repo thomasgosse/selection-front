@@ -37,19 +37,19 @@ export default class selectionService {
   static async getArtistAlbums(id) {
     return axios.get(`http://localhost:3000/contents/artists/${id}/albums`)
       .then(response => response.data)
-      .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'));
+      .catch(() => sendNotification('Erreur lors de la connexion au serveur', 'ban', 'warning'));
   }
 
   static async getTVShowDetail(id) {
     return axios.get(`http://localhost:3000/contents/tvshow/${id}`)
       .then(response => response.data)
-      .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'));
+      .catch(() => sendNotification('Erreur lors de la connexion au serveur', 'ban', 'warning'));
   }
 
   static async getAlbumDetail(id) {
     return axios.get(`http://localhost:3000/contents/album/${id}`)
       .then(response => response.data)
-      .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'));
+      .catch(() => sendNotification('Erreur lors de la connexion au serveur', 'ban', 'warning'));
   }
 
   static async getArtworksCounts(id, type) {

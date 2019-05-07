@@ -1,6 +1,6 @@
 <template>
   <AlbumDetail
-    v-if="!isLoading"
+    v-if="!isLoading && currentAlbumDetail"
     :detail="currentAlbumDetail"
     :handle-click="handleClick"
   />
@@ -34,6 +34,7 @@ export default {
     ...mapGetters(['userId']),
   },
   beforeMount() {
+    this.isLoading = true;
     this.getAlbumDetail(this.id)
       .finally(() => { this.isLoading = false; });
   },

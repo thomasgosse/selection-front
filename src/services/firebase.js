@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import { sendNotification } from '@/helpers/uikit';
 
 require('firebase/auth');
 
@@ -24,7 +25,8 @@ export default class firebaseService {
   }
 
   static async signOut() {
-    return firebase.auth().signOut();
+    return firebase.auth().signOut()
+      .catch(() => sendNotification('La deconnexion a échouée', 'ban', 'danger'));
   }
 
   static async getUser() {

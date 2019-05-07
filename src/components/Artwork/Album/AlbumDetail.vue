@@ -1,5 +1,8 @@
 <template>
-  <div class="uk-container uk-container-large uk-margin">
+  <div
+    v-if="detail.name"
+    class="uk-container uk-container-large uk-margin"
+  >
     <h1>
       <span class="black">{{ detail.name }}</span>
       <span class="thin-italic">

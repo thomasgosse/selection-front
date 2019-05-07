@@ -1,6 +1,6 @@
 <template>
   <TVShowDetail
-    v-if="!isLoading"
+    v-if="!isLoading && currentTVShowDetail"
     :detail="currentTVShowDetail"
     :handle-click="handleClick"
   />
@@ -34,6 +34,7 @@ export default {
     ...mapGetters(['userId']),
   },
   beforeMount() {
+    this.isLoading = true;
     this.getTVShowDetail(this.id)
       .finally(() => { this.isLoading = false; });
   },

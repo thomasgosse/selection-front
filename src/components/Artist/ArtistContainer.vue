@@ -1,6 +1,6 @@
 <template>
   <Artist
-    v-if="name"
+    v-if="!isLoading && name"
     :name="name"
     :albums="currentArtistAlbums"
     :singles="currentArtistSingles"
@@ -30,22 +30,29 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      isLoading: true,
+    };
+  },
   computed: {
     ...mapGetters(['currentArtistAlbums', 'currentArtistSingles', 'userId']),
   },
   beforeMount() {
-    this.retrieveArtist(this.id);
+    this.isLoading = true;
+    this.getArtistAlbums(this.id)
+      .finally(() => { this.isLoading = false; });
   },
   beforeRouteUpdate(to, from, next) {
-    this.retrieveArtist(to.params.id);
-    next();
+    this.isLoading = true;
+    this.getArtistAlbums(to.params.id)
+      .finally(() => {
+        this.isLoading = false;
+        next();
+      });
   },
   methods: {
     ...mapActions(['getArtistAlbums']),
-    retrieveArtist(id) {
-      this.getArtistAlbums(id)
-        .catch(() => this.$router.push({ path: '/' }));
-    },
     handleClick(artwork) {
       const { type, id } = artwork;
       const builtArtwork = this.buildAlbum(artwork);

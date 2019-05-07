@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="detail.name"
     class="uk-container uk-container-large uk-margin"
   >
     <h1>

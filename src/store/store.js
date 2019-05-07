@@ -5,7 +5,7 @@ import Vue from 'vue';
 import selectionService from '@/services/selection'
 import firebaseService from '@/services/firebase';
 import _ from 'lodash';
-import { hideOffCanvas, sendNotification } from '@/helpers/uikit';
+import { hideOffCanvas } from '@/helpers/uikit';
 import userUtils from '@/mixins/userUtils';
 
 const defaultImage = require('@/assets/ghost-solid.svg');
@@ -77,14 +77,28 @@ export default new Vuex.Store({
         return result;
       });
     },
-    getUserArtworksByType({ commit }, {userId, type, startAfter}) {
+    getUserArtworksByType({ commit }, { userId, type, startAfter }) {
       return selectionService.getUserArtworksByType(userId, type, startAfter)
-        .then((result) => result)
+        .then((result) => result);
     },
-    getArtworksCount({ commit }, {userId, type}) {
-      return selectionService.getArtworksCount(userId, type)
+    getAllFirstsUserArtworks({ commit }, userId) {
+      const albums = selectionService.getUserArtworksByType(userId, 'album')
+      const tvshows = selectionService.getUserArtworksByType(userId, 'tvshow')
+      return Promise.all([albums, tvshows])
         .then((result) => {
-          commit('UPDATE_ARTWORK_COUNTS', { type, count: result.artworkCount })
+          return {
+            albums: result[0],
+            tvshows: result[1]
+          }
+        });
+    },
+    getArtworksCounts({ commit }, userId) {
+      const tvShowCount = selectionService.getArtworksCounts(userId, 'tvshow')
+      const albumCount = selectionService.getArtworksCounts(userId, 'album')
+      Promise.all([albumCount, tvShowCount])
+        .then((result) => {
+          commit('UPDATE_ARTWORK_COUNTS', { type: 'album', count: result[0].artworkCount })
+          commit('UPDATE_ARTWORK_COUNTS', { type: 'tvshow', count: result[1].artworkCount })
         });
     },
     signOut({ commit }) {
@@ -94,8 +108,7 @@ export default new Vuex.Store({
           commit('LOGOUT');
           commit('REMOVE_TOKEN');
           hideOffCanvas();
-        })
-        .catch(() => sendNotification('La deconnexion a échouée', 'ban', 'danger'));
+        });
     },
     signIn({ commit }, { username, password }) {
       return firebaseService.signIn(username, password)
@@ -109,8 +122,8 @@ export default new Vuex.Store({
         });
     },
     signUp({ commit }, { username, password }) {
-      return firebaseService.signUp(username, password)
-    }
+      return firebaseService.signUp(username, password);
+    },
   },
   getters: {
     userImage(state) {

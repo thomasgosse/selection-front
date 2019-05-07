@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h2 class="thin-italic">
+    <h2
+      v-if="title"
+      class="thin-italic"
+    >
       {{ title }}
     </h2>
     <div
@@ -34,7 +37,7 @@ export default {
   props: {
     title: {
       type: String,
-      required: true,
+      default: '',
     },
     items: {
       type: Array,

@@ -4,8 +4,8 @@
     :tvshows="userTVShows"
     :handle-click="handleClick"
     :current-user="user"
-    :get-next-tvshow-page="getNextTvshowPage"
-    :get-next-album-page="getNextAlbumPage"
+    :get-next-tvshow-page="getNextArtworkPage"
+    :get-next-album-page="getNextArtworkPage"
     :is-loading="isLoading"
   />
 </template>
@@ -33,20 +33,16 @@ export default {
     ...mapGetters(['userId']),
   },
   beforeMount() {
-    this.getArtworksCount({ userId: this.userId, type: 'album' });
-    this.getArtworksCount({ userId: this.userId, type: 'tvshow' });
-    this.getUserArtworksByType({ userId: this.userId, type: 'album' })
-      .then((albums) => {
-        this.userAlbums = albums;
-        this.getUserArtworksByType({ userId: this.userId, type: 'tvshow' })
-          .then((tvshows) => {
-            this.userTVShows = tvshows;
-          });
+    this.getArtworksCounts(this.userId);
+    this.getAllFirstsUserArtworks(this.userId)
+      .then((result) => {
+        this.userAlbums = result.albums;
+        this.userTVShows = result.tvshows;
       })
       .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'));
   },
   methods: {
-    ...mapActions(['getUserArtworksByType', 'getArtworksCount']),
+    ...mapActions(['getAllFirstsUserArtworks', 'getUserArtworksByType', 'getArtworksCounts']),
     handleClick({ id, type }) {
       selectionService.deleteUserArtwork(this.userId, id, type)
         .then(() => {
@@ -56,23 +52,17 @@ export default {
         })
         .catch(() => sendNotification('L\'œuvre n\'a pas pu être supprimée', 'ban', 'danger'));
     },
-    async getNextAlbumPage() {
+    getNextArtworkPage(collectionName, type) {
       this.isLoading = true;
-      const lastItemDate = this.userAlbums[this.userAlbums.length - 1].timestamp;
-      const nextPage = await this.getUserArtworksByType(
-        { userId: this.userId, type: 'album', startAfter: lastItemDate },
-      );
-      this.userAlbums = this.userAlbums.concat(nextPage);
-      this.isLoading = false;
-    },
-    async getNextTvshowPage() {
-      this.isLoading = true;
-      const lastItemDate = this.userTVShows[this.userTVShows.length - 1].timestamp;
-      const nextPage = await this.getUserArtworksByType(
-        { userId: this.userId, type: 'tvshow', startAfter: lastItemDate },
-      );
-      this.userTVShows = this.userTVShows.concat(nextPage);
-      this.isLoading = false;
+      const lastItemDate = this[collectionName][this[collectionName].length - 1].timestamp;
+      this.getUserArtworksByType({ userId: this.userId, type, startAfter: lastItemDate })
+        .then((nextPage) => {
+          this[collectionName] = this[collectionName].concat(nextPage);
+        })
+        .catch(() => sendNotification('Erreur de connection au serveur', 'ban', 'warning'))
+        .finally(() => {
+          this.isLoading = false;
+        });
     },
   },
 };

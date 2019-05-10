@@ -22,58 +22,36 @@
     </ul>
     <ul class="uk-switcher uk-margin">
       <li>
-        <ArtworkList
-          v-if="albums.length > 0"
+        <UserDashboardExpandableList
           :items="albums"
-          :handle-click="handleClick"
-          icon="close"
+          :is-loading="isLoading"
+          :handle-click-item="handleClickItem"
+          :get-next-artwork-page="getNextArtworkPage"
+          collection-name="userAlbums"
+          artwork-type="album"
         />
-        <div class="uk-flex uk-flex-center uk-margin-top">
-          <button
-            v-if="!isLoading"
-            class="uk-button uk-button-default circle-btn"
-            @click="getNextAlbumPage('userAlbums', 'album')"
-          >
-            <span uk-icon="plus" />
-          </button>
-          <div
-            v-else
-            uk-spinner
-          />
-        </div>
       </li>
       <li>
-        <ArtworkList
-          v-if="tvshows.length > 0"
+        <UserDashboardExpandableList
           :items="tvshows"
-          :handle-click="handleClick"
-          icon="close"
+          :is-loading="isLoading"
+          :handle-click-item="handleClickItem"
+          :get-next-artwork-page="getNextArtworkPage"
+          collection-name="userTVShows"
+          artwork-type="tvshow"
         />
-        <div class="uk-flex uk-flex-center uk-margin-top">
-          <button
-            v-if="!isLoading"
-            class="uk-button uk-button-default circle-btn"
-            @click="getNextTvshowPage('userTVShows', 'tvshow')"
-          >
-            <span uk-icon="plus" />
-          </button>
-          <div
-            v-else
-            uk-spinner
-          />
-        </div>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import ArtworkList from '@/components/Artwork/ArtworkList';
+import UserDashboardExpandableList from './UserDashboardExpandableList';
 
 export default {
   name: 'UserDashboard',
   components: {
-    ArtworkList,
+    UserDashboardExpandableList,
   },
   props: {
     albums: {
@@ -88,15 +66,11 @@ export default {
       type: Object,
       required: true,
     },
-    handleClick: {
+    handleClickItem: {
       type: Function,
       required: true,
     },
-    getNextTvshowPage: {
-      type: Function,
-      required: true,
-    },
-    getNextAlbumPage: {
+    getNextArtworkPage: {
       type: Function,
       required: true,
     },
@@ -107,9 +81,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.circle-btn {
-  border-radius: 50px;
-}
-</style>

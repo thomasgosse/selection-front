@@ -2,10 +2,9 @@
   <UserDashboard
     :albums="userAlbums"
     :tvshows="userTVShows"
-    :handle-click="handleClick"
+    :handle-click-item="handleClickItem"
     :current-user="user"
-    :get-next-tvshow-page="getNextArtworkPage"
-    :get-next-album-page="getNextArtworkPage"
+    :get-next-artwork-page="getNextArtworkPage"
     :is-loading="isLoading"
   />
 </template>
@@ -33,17 +32,21 @@ export default {
     ...mapGetters(['userId']),
   },
   beforeMount() {
+    this.isLoading = true;
     this.getArtworksCounts(this.userId);
     this.getAllFirstsUserArtworks(this.userId)
       .then((result) => {
         this.userAlbums = result.albums;
         this.userTVShows = result.tvshows;
       })
-      .catch(() => sendNotification('Erreur lors de la connexion au serveur', 'ban', 'warning'));
+      .catch(() => sendNotification('Erreur lors de la connexion au serveur', 'ban', 'warning'))
+      .finally(() => {
+        this.isLoading = false;
+      });
   },
   methods: {
     ...mapActions(['getAllFirstsUserArtworks', 'getUserArtworksByType', 'getArtworksCounts']),
-    handleClick({ id, type }) {
+    handleClickItem({ id, type }) {
       selectionService.deleteUserArtwork(this.userId, id, type)
         .then(() => {
           this.userAlbums = this.userAlbums.filter(artwork => artwork.id !== id);

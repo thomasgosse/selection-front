@@ -20,15 +20,15 @@
         >
           {{ item.name | shortenName(imageWidth) }}
         </p>
-        <a
+        <button
           class="uk-transition-fade uk-icon-link uk-margin-right"
           :uk-icon="`icon: ${icon}; ratio: 2`"
           @click="handleClick(item)"
         />
-        <a
+        <router-link
           class="uk-transition-fade uk-icon-link"
           :uk-icon="`icon: more; ratio: 2`"
-          @click="goToDetail(item)"
+          :to="`/${item.type}/${item.name}/${item.id}`"
         />
       </div>
     </div>

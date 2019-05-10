@@ -14,12 +14,12 @@
         style="font-size: 1.8rem"
       >
         -
-        <a
+        <router-link
+          :to="`/artist/${artist.name}/${artist.id}`"
           class="black"
-          @click="goToArtistPage(artist.name, artist.id)"
         >
           <span>{{ artist.name }}</span>
-        </a>
+        </router-link>
       </span>
     </h1>
     <div
@@ -63,11 +63,6 @@ export default {
     handleClick: {
       type: Function,
       required: true,
-    },
-  },
-  methods: {
-    goToArtistPage(name, id) {
-      this.$router.push({ path: `/artist/${name}/${id}` });
     },
   },
 };

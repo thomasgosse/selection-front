@@ -12,15 +12,15 @@
           uk-toggle="target: #offcanvas-push"
         />
       </ul>
-      <a
+      <router-link
         class="uk-navbar-item uk-logo"
-        @click="goToHomePage"
+        to="/home"
       >
         <img
           src="@/assets/selection.png"
           class="logo"
         >
-      </a>
+      </router-link>
     </div>
 
     <div
@@ -49,7 +49,7 @@
       class="uk-navbar-right uk-margin-right"
     >
       <ul class="uk-navbar-nav">
-        <a
+        <button
           class="uk-icon-button"
           uk-icon="icon: user; ratio: 1.4"
           uk-tooltip="title: Connectez vous !; pos: bottom-left"
@@ -80,9 +80,6 @@ export default {
     },
   },
   methods: {
-    goToHomePage() {
-      this.$router.push({ path: '/home' });
-    },
     goToSignIn() {
       UIkit.switcher('#signInUp').show(0);
     },

@@ -8,7 +8,7 @@
     <div class="uk-flex uk-flex-center uk-margin-top">
       <button
         v-if="!isLoading"
-        class="uk-button uk-button-default circle-btn"
+        class="uk-button uk-button-default"
         @click="getNextArtworkPage(collectionName, artworkType)"
       >
         <span uk-icon="plus" />
@@ -63,9 +63,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.circle-btn {
-  border-radius: 50px;
-}
-</style>

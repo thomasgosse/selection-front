@@ -34,7 +34,10 @@
           uk-img
         >
       </a>
-      <div uk-dropdown="mode: click">
+      <div
+        uk-dropdown="mode: click"
+        class="rounded-shape"
+      >
         <button
           class="uk-button uk-button-primary"
           @click="onLogout"

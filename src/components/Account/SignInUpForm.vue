@@ -1,6 +1,6 @@
 <template>
   <div
-    class="uk-card uk-card-default uk-card-body uk-text-center"
+    class="uk-card uk-card-default uk-card-body uk-text-center rounded-shape"
     @keyup.enter="onSubmit(username, password, name)"
   >
     <h2 class="black">
@@ -17,7 +17,7 @@
         />
         <input
           v-model="name"
-          class="uk-input uk-form-width-large thin-italic"
+          class="uk-input uk-form-width-large thin-italic rounded-shape"
           type="text"
           placeholder="Pseudonyme"
         >
@@ -31,7 +31,7 @@
         />
         <input
           v-model="username"
-          class="uk-input uk-form-width-large thin-italic"
+          class="uk-input uk-form-width-large thin-italic rounded-shape"
           type="text"
           placeholder="Adresse e-mail"
         >
@@ -45,7 +45,7 @@
         />
         <input
           v-model="password"
-          class="uk-input uk-form-width-large thin-italic"
+          class="uk-input uk-form-width-large thin-italic rounded-shape"
           type="password"
           placeholder="Mot de passe"
         >

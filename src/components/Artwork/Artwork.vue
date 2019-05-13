@@ -1,6 +1,6 @@
 <template>
   <div
-    class="uk-inline-clip uk-transition-toggle"
+    class="uk-inline-clip uk-transition-toggle rounded-shape"
     tabindex="0"
   >
     <v-lazy-image
@@ -10,7 +10,7 @@
     />
     <div
       class="uk-transition-fade uk-position-cover
-             uk-position-small uk-overlay uk-overlay-default"
+             uk-position-small uk-overlay uk-overlay-default rounded-shape"
     >
       <div class="uk-text-center">
         <p

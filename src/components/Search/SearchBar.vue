@@ -6,20 +6,18 @@
     <div class="uk-offcanvas-bar">
       <div>
         <form
-          class="uk-search uk-search-navbar"
-          uk-grid
           @submit.prevent="onChange(search)"
         >
           <input
             v-model="search"
-            class="uk-search-input uk-width-2-3@m uk-padding-remove"
+            class="uk-input uk-width-5-6 rounded-shape"
             type="search"
             placeholder="Search..."
           >
           <div
             v-if="isLoading"
+            class="uk-margin-small-left"
             uk-spinner
-            class="uk-width-auto@m"
           />
         </form>
       </div>
@@ -51,6 +49,6 @@ export default {
 
 <style scoped>
 .uk-offcanvas-bar {
-    padding: 1.6rem 2rem;
+  padding: 1.6rem 2rem;
 }
 </style>

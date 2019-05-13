@@ -9,6 +9,7 @@
       :on-click="onClickItem"
       :set-max-items="setMaxArtists"
       type="artist"
+      more-label="d'artistes"
       radius="50"
     />
     <SearchBarList
@@ -17,6 +18,7 @@
       :on-click="onClickItem"
       :set-max-items="setMaxAlbums"
       type="album"
+      more-label="d'albums"
     />
     <SearchBarList
       title="séries"
@@ -24,6 +26,7 @@
       :on-click="onClickItem"
       :set-max-items="setMaxTVShows"
       type="tvshow"
+      more-label="de séries"
       images-height="7.5"
     />
   </ul>

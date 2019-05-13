@@ -29,4 +29,12 @@ export default {
   .thin {
     font-weight: 100;
   }
+
+  .uk-button {
+    border-radius: 5px
+  }
+
+  .rounded-shape {
+    border-radius: 4px
+  }
 </style>

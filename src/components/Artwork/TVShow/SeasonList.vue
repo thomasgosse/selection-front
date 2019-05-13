@@ -33,6 +33,7 @@
           <div class="uk-width-1-5@m">
             <v-lazy-image
               v-if="season.images"
+              class="rounded-shape"
               :src="season.images[0].url"
             />
           </div>

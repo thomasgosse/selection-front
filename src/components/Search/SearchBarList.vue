@@ -41,7 +41,15 @@
         class="uk-button uk-button-default uk-margin-top"
         @click="setMaxItems"
       >
-        +/- d'{{ title }}
+        <span
+          v-if="areMoreItemsDisplayable"
+          uk-icon="icon: plus; ratio: 0.7"
+        />
+        <span
+          v-else
+          uk-icon="icon: minus; ratio: 0.7"
+        />
+        {{ moreLabel }}
       </button>
     </table>
     <div
@@ -54,10 +62,16 @@
 </template>
 
 <script>
+import { MAX_DISPLAYABLE_ITEMS } from '@/helpers/constants';
+
 export default {
   name: 'SearchBarList',
   props: {
     title: {
+      type: String,
+      default: '',
+    },
+    moreLabel: {
       type: String,
       default: '',
     },
@@ -84,6 +98,11 @@ export default {
     type: {
       type: String,
       default: '',
+    },
+  },
+  computed: {
+    areMoreItemsDisplayable() {
+      return this.items.length < MAX_DISPLAYABLE_ITEMS;
     },
   },
 };

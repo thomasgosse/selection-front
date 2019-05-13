@@ -52,7 +52,7 @@ export default class selectionService {
       .catch(() => sendNotification('Erreur lors de la connexion au serveur', 'ban', 'warning'));
   }
 
-  static async getArtworksCounts(id, type) {
+  static async getUserArtworksCounts(id, type) {
     return axios.get(`http://localhost:3000/users/${id}/${type}/count`)
       .then(response => response.data);
   }

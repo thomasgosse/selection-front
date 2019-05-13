@@ -1,8 +1,8 @@
 <template>
   <div v-if="!isLoading">
-    <HeaderBarContainer :is-authorized="loggedIn" />
+    <HeaderBarContainer :is-authorized="authentication.loggedIn" />
     <SearchBarContainer />
-    <router-view v-if="loggedIn" />
+    <router-view v-if="authentication.loggedIn" />
     <SignInUpContainer v-else />
   </div>
 </template>
@@ -29,7 +29,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['loggedIn']),
+    ...mapState(['authentication']),
   },
   beforeMount() {
     firebaseService.getUser()

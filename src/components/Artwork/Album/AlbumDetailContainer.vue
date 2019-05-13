@@ -1,7 +1,7 @@
 <template>
   <AlbumDetail
-    v-if="!isLoading && currentAlbumDetail"
-    :detail="currentAlbumDetail"
+    v-if="!isLoading && contents.currentAlbumDetail"
+    :detail="contents.currentAlbumDetail"
     :handle-click="handleClick"
   />
 </template>
@@ -30,7 +30,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['currentAlbumDetail']),
+    ...mapState(['contents']),
     ...mapGetters(['userId']),
   },
   beforeMount() {

@@ -1,7 +1,7 @@
 <template>
   <TVShowDetail
-    v-if="!isLoading && currentTVShowDetail"
-    :detail="currentTVShowDetail"
+    v-if="!isLoading && contents.currentTVShowDetail"
+    :detail="contents.currentTVShowDetail"
     :handle-click="handleClick"
   />
 </template>
@@ -30,7 +30,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['currentTVShowDetail']),
+    ...mapState(['contents']),
     ...mapGetters(['userId']),
   },
   beforeMount() {

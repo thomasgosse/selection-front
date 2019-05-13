@@ -33,7 +33,7 @@ export default {
   },
   beforeMount() {
     this.isLoading = true;
-    this.getArtworksCounts(this.userId);
+    this.getUserArtworksCounts(this.userId);
     this.getAllFirstsUserArtworks(this.userId)
       .then((result) => {
         this.userAlbums = result.albums;
@@ -45,7 +45,7 @@ export default {
       });
   },
   methods: {
-    ...mapActions(['getAllFirstsUserArtworks', 'getUserArtworksByType', 'getArtworksCounts']),
+    ...mapActions(['getAllFirstsUserArtworks', 'getUserArtworksByType', 'getUserArtworksCounts']),
     handleClickItem({ id, type }) {
       selectionService.deleteUserArtwork(this.userId, id, type)
         .then(() => {

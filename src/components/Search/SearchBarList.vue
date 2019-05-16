@@ -15,7 +15,6 @@
           <td
             uk-grid
             class="artist uk-grid-small uk-child-width-expand@s uk-text-left"
-            uk-scrollspy="cls: uk-animation-fade; target: > .picture; delay: 100; repeat: false"
             @click="onClick(item, type)"
           >
             <div class="uk-width-1-3@m picture">

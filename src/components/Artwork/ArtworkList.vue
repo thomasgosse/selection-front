@@ -9,7 +9,6 @@
     <div
       class="uk-flex-middle"
       uk-grid
-      uk-scrollspy="cls: uk-animation-fade; target: > .artwork; delay: 100; repeat: false"
     >
       <div
         v-for="item in items"

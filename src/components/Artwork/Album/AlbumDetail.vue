@@ -5,7 +5,10 @@
   >
     <h1>
       <span class="black">{{ detail.name }}</span>
-      <span class="thin-italic">
+      <span
+        v-if="detail.releaseDate"
+        class="thin-italic"
+      >
         ({{ detail.releaseDate.split('-')[0] }})
       </span>
       <span

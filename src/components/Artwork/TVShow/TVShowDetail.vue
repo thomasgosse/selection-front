@@ -1,13 +1,16 @@
 <template>
   <div
-    v-if="detail.name"
+    v-if="isDetailEmpty"
     class="uk-container uk-container-large uk-margin"
   >
     <h1>
       <span class="black">
         {{ detail.name }}
       </span>
-      <span class="thin-italic">
+      <span
+        v-if="detail.releaseDate"
+        class="thin-italic"
+      >
         ({{ detail.releaseDate.split('-')[0] }})
       </span>
     </h1>
@@ -42,10 +45,12 @@
       </div>
     </div>
   </div>
+  <NoInformation v-else />
 </template>
 
 <script>
 import Artwork from '@/components/Artwork/Artwork';
+import NoInformation from '@/components/Shared/NoInformation';
 import SeasonList from './SeasonList';
 
 export default {
@@ -53,6 +58,7 @@ export default {
   components: {
     SeasonList,
     Artwork,
+    NoInformation,
   },
   props: {
     detail: {
@@ -62,6 +68,11 @@ export default {
     handleClick: {
       type: Function,
       required: true,
+    },
+  },
+  computed: {
+    isDetailEmpty() {
+      return this.detail.seasons.length > 0 && this.detail.overview;
     },
   },
 };

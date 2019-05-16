@@ -2,38 +2,41 @@
   <div
     class="uk-container uk-container-large uk-margin"
   >
-    <article
-      class="uk-article"
-    >
+    <article class="uk-article">
       <h1 class="black">
         {{ name }}
       </h1>
-      <ArtworkList
-        v-if="albums.length > 0"
-        title="albums"
-        :items="albums"
-        :handle-click="handleClick"
-        icon="plus"
-      />
-      <ArtworkList
-        v-if="singles.length > 0"
-        class="uk-margin-top"
-        title="singles & EPs"
-        :items="singles"
-        :handle-click="handleClick"
-        icon="plus"
-      />
+      <div v-if="areAlbumsOrSingles">
+        <ArtworkList
+          v-if="albums.length > 0"
+          title="albums"
+          :items="albums"
+          :handle-click="handleClick"
+          icon="plus"
+        />
+        <ArtworkList
+          v-if="singles.length > 0"
+          class="uk-margin-top"
+          title="singles & EPs"
+          :items="singles"
+          :handle-click="handleClick"
+          icon="plus"
+        />
+      </div>
+      <NoInformation v-else />
     </article>
   </div>
 </template>
 
 <script>
 import ArtworkList from '@/components/Artwork/ArtworkList';
+import NoInformation from '@/components/Shared/NoInformation';
 
 export default {
   name: 'Artist',
   components: {
     ArtworkList,
+    NoInformation,
   },
   props: {
     name: {
@@ -51,6 +54,11 @@ export default {
     handleClick: {
       type: Function,
       required: true,
+    },
+  },
+  computed: {
+    areAlbumsOrSingles() {
+      return this.albums.length > 0 && this.singles.length > 0;
     },
   },
 };

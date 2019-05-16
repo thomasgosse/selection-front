@@ -35,7 +35,7 @@
     "vue-template-compiler": "^2.6.10"
   },
   "resolutions": {
-    "@vue/cli-plugin-unit-jest/jest": "^24.6.0",
-    "@vue/cli-plugin-unit-jest/babel-jest": "^24.6.0"
+    "@vue/cli-plugin-unit-jest/jest": "^24.7.1",
+    "@vue/cli-plugin-unit-jest/babel-jest": "^24.7.1"
   }
 }

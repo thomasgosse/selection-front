@@ -24,6 +24,7 @@
       <li>
         <UserDashboardExpandableList
           :items="albums"
+          :total-items-count="userAlbumsCount"
           :is-loading="isLoading"
           :handle-click-item="handleClickItem"
           :get-next-artwork-page="getNextArtworkPage"
@@ -34,6 +35,7 @@
       <li>
         <UserDashboardExpandableList
           :items="tvshows"
+          :total-items-count="userTvShowsCount"
           :is-loading="isLoading"
           :handle-click-item="handleClickItem"
           :get-next-artwork-page="getNextArtworkPage"
@@ -60,6 +62,14 @@ export default {
     },
     tvshows: {
       type: Array,
+      required: true,
+    },
+    userAlbumsCount: {
+      type: Number,
+      required: true,
+    },
+    userTvShowsCount: {
+      type: Number,
       required: true,
     },
     currentUser: {

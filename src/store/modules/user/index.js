@@ -22,6 +22,12 @@ const getters = {
   userId(state) {
     return state.id;
   },
+  userAlbumsCount(state) {
+    return state.artworksCounts.album;
+  },
+  userTvShowsCount(state) {
+    return state.artworksCounts.tvshow;
+  },
 };
 
 const actions = {
@@ -56,7 +62,7 @@ export default {
     mainImage: '',
     name: '',
     id: '',
-    artworksCounts: {},
+    artworksCounts: { album: 0, tvshow: 0 },
   },
   mutations,
   actions,

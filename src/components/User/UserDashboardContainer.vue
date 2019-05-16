@@ -2,6 +2,8 @@
   <UserDashboard
     :albums="userAlbums"
     :tvshows="userTVShows"
+    :user-albums-count="userAlbumsCount"
+    :user-tv-shows-count="userTvShowsCount"
     :handle-click-item="handleClickItem"
     :current-user="user"
     :get-next-artwork-page="getNextArtworkPage"
@@ -29,7 +31,7 @@ export default {
   },
   computed: {
     ...mapState(['user']),
-    ...mapGetters(['userId']),
+    ...mapGetters(['userId', 'userAlbumsCount', 'userTvShowsCount']),
   },
   beforeMount() {
     this.isLoading = true;

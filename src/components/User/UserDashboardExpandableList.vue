@@ -5,7 +5,10 @@
       :handle-click="handleClickItem"
       icon="close"
     />
-    <div class="uk-flex uk-flex-center uk-margin-top">
+    <div
+      v-if="!isItemListFull"
+      class="uk-flex uk-flex-center uk-margin-top"
+    >
       <button
         v-if="!isLoading"
         class="uk-button uk-button-default"
@@ -40,6 +43,10 @@ export default {
       type: Array,
       required: true,
     },
+    totalItemsCount: {
+      type: Number,
+      required: true,
+    },
     isLoading: {
       type: Boolean,
       required: true,
@@ -59,6 +66,11 @@ export default {
     getNextArtworkPage: {
       type: Function,
       required: true,
+    },
+  },
+  computed: {
+    isItemListFull() {
+      return this.items.length === this.totalItemsCount;
     },
   },
 };

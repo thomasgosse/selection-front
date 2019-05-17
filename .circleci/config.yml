@@ -5,6 +5,38 @@ jobs:
       - image: node:11
     steps:
       - checkout
-      - run: yarn install
-      - run: yarn audit
-      - run: yarn lint
+      - run:
+          name: Install dependencies 
+          command: yarn install --silent
+      - run: 
+          name: Audit dependencies
+          command: yarn audit
+      - run: 
+          name: Build project
+          command: yarn build
+  test:
+    docker:
+      - image: node:11
+    steps:
+      - checkout
+      - run: 
+          name: Run linter
+          command: yarn lint
+  deploy:
+    docker:
+      - image: node:11
+    steps:
+      - run: echo 'to do !'
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - build
+      - test
+      - deploy:
+          requires:
+            -build
+    filters:
+      branches:
+        only:
+          - master

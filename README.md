@@ -1,5 +1,7 @@
 # selection-cli
 
+[![CircleCI](https://circleci.com/gh/thomasgosse/selection-front.svg?style=svg)](https://circleci.com/gh/thomasgosse/selection-front)
+
 ## Project setup
 ```
 yarn install

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import selectionService from '@/services/selection'
 
-const defaultImage = require('@/assets/ghost-solid.svg');
+const defaultImage = require('@/assets/alien.svg');
 
 const mutations = {
   SET_USER(state, { mainImage, id, name }) {

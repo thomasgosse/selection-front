@@ -17,12 +17,15 @@
             class="artist uk-grid-small uk-child-width-expand@s uk-text-left"
             @click="onClick(item, type)"
           >
-            <div class="uk-width-1-3@m picture">
+            <div class="uk-width-1-3@m">
               <div
                 class="item-picture"
                 :style="{ 'border-radius': radius + '%', height: imagesHeight + 'rem' }"
               >
-                <v-lazy-image :src="item.image" />
+                <v-lazy-image
+                  class="picture"
+                  :src="item.image"
+                />
               </div>
             </div>
             <div class="uk-width-2-3@m">
@@ -113,7 +116,7 @@ export default {
 }
 
 .artist:hover {
-  background-color: green;
+  background-color: #BE9B6F;
   cursor: pointer;
 }
 
@@ -121,5 +124,10 @@ export default {
     position:relative;
     overflow:hidden;
     width: 5rem;
+}
+
+.picture {
+    height: 5rem;
+    object-fit: cover;
 }
 </style>

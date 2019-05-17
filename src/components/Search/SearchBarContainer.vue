@@ -23,7 +23,7 @@ import selectionService from '@/services/selection';
 import { toggleOffCanvas, sendNotification } from '@/helpers/uikit';
 import { DEFAULT_MAX_ITEMS, MAX_DISPLAYABLE_ITEMS } from '@/helpers/constants';
 
-const defaultImage = require('@/assets/ghost-solid.svg');
+const defaultImage = require('@/assets/faqs.svg');
 
 export default {
   name: 'SearchBarContainer',

@@ -17,7 +17,7 @@
         to="/home"
       >
         <img
-          src="@/assets/selection.png"
+          src="@/assets/book.svg"
           class="logo"
         >
       </router-link>
@@ -97,12 +97,12 @@ export default {
 }
 
 .uk-border-circle {
-  height: 3rem;
-  width: 1.5rem;
+  height: 3.5rem;
+  width: 2.2rem;
 }
 
 .logo {
-  height: 3rem;
-  width: 4.3rem;
+  height: 4rem;
+  width: 5.3rem;
 }
 </style>

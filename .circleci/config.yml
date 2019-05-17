@@ -28,7 +28,12 @@ jobs:
     docker:
       - image: node:11
     steps:
-      - run: echo 'to do !'
+      - setup_remote_docker
+      - run: |
+          TAG=$(git describe --tags)
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker build -t thomasgosse/selection:$TAG .
+          docker push thomasgosse/selection:$TAG
       
 workflows:
   version: 2

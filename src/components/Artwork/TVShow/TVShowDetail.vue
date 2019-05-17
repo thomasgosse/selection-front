@@ -45,7 +45,13 @@
       </div>
     </div>
   </div>
-  <NoInformation v-else />
+  <NoInformation
+    v-else
+    top-label="Nous n'avons pas réussi a récupérer
+    assez d'informations à propos de"
+    bottom-label="Fais une autre recherche et tu auras plus de chances !"
+    :name="detail.name"
+  />
 </template>
 
 <script>

@@ -1,12 +1,13 @@
 <template>
-  <div
-    class="uk-container uk-container-large uk-margin"
-  >
-    <article class="uk-article">
+  <div class="uk-container uk-container-large uk-margin">
+    <article
+      v-if="areAlbumsOrSingles"
+      class="uk-article"
+    >
       <h1 class="black">
         {{ name }}
       </h1>
-      <div v-if="areAlbumsOrSingles">
+      <div>
         <ArtworkList
           v-if="albums.length > 0"
           title="albums"
@@ -23,8 +24,14 @@
           icon="plus"
         />
       </div>
-      <NoInformation v-else />
     </article>
+    <NoInformation
+      v-else
+      top-label="Nous n'avons pas réussi a récupérer
+      assez d'informations à propos de"
+      bottom-label="Fais une autre recherche et tu auras plus de chances !"
+      :name="name"
+    />
   </div>
 </template>
 

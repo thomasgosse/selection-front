@@ -23,20 +23,25 @@
     </div>
   </div>
   <div v-else>
-    <!-- TO DO BETTER -->
-    <div v-if="!isLoading">
-      Ajoutez des artworks !
-    </div>
+    <NoInformation
+      v-if="!isLoading"
+      class="uk-margin-large-top"
+      top-label="Tu n'as pas encore d'oeuvres enregistrée ici..."
+      bottom-label="Fais une recherche pour en ajouter une !"
+      image="tumbleweed"
+    />
   </div>
 </template>
 
 <script>
 import ArtworkList from '@/components/Artwork/ArtworkList';
+import NoInformation from '@/components/Shared/NoInformation';
 
 export default {
   name: 'UserDashboardExpandableList',
   components: {
     ArtworkList,
+    NoInformation,
   },
   props: {
     items: {

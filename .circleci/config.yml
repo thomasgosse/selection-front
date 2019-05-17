@@ -29,7 +29,7 @@ jobs:
     steps:
       - checkout
       - run: |
-          TAG=$(git describe --tags)
+          TAG=$(git describe --tags --abbrev=0)
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker build -t thomasgosse/selection:$TAG .
           docker push thomasgosse/selection:$TAG

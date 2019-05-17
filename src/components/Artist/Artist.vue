@@ -29,7 +29,7 @@
       v-else
       top-label="Nous n'avons pas réussi a récupérer
       assez d'informations à propos de"
-      bottom-label="Fais une autre recherche et tu auras plus de chances !"
+      bottom-label="Fais une autre recherche et tu auras surement plus de chances !"
       :name="name"
     />
   </div>

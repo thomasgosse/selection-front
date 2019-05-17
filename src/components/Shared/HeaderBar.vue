@@ -39,10 +39,16 @@
         class="rounded-shape"
       >
         <button
-          class="uk-button uk-button-primary"
+          class="uk-button uk-button-default"
           @click="onLogout"
         >
-          Deconnexion
+          <span>
+            Log-out
+          </span>
+          <img
+            src="@/assets/power-button.svg"
+            width="20"
+          >
         </button>
       </div>
     </div>

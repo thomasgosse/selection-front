@@ -11,14 +11,16 @@ jobs:
       - run: 
           name: Audit dependencies
           command: yarn audit
-      - run: 
-          name: Build project
-          command: yarn build
+      - persist_to_workspace:
+          root: ./
+          paths: [node_modules]
   test:
     docker:
       - image: node:11
     steps:
       - checkout
+      - attach_workspace:
+          at: ./
       - run: 
           name: Run linter
           command: yarn lint
@@ -33,7 +35,9 @@ workflows:
   build-test-and-deploy:
     jobs:
       - build
-      - test
+      - test:
+          requires:
+            - build
       - deploy:
           requires:
             - build

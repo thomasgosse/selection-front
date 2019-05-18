@@ -14,6 +14,9 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths: [node_modules]
+      - persist_to_workspace:
+          root: ./
+          paths: [dist]
   test:
     docker:
       - image: node:11
@@ -25,14 +28,18 @@ jobs:
           name: Run linter
           command: yarn lint
   deploy:
-    machine: true
+    docker:
+      - image: node:11
     steps:
       - checkout
-      - run: |
-          TAG=$(git describe --tags --abbrev=0)
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker build -t thomasgosse/selection:$TAG .
-          docker push thomasgosse/selection:$TAG
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Install Firebase
+          command: npm install -g firebase-tools
+      - run:
+          name: Deploy to Firebase
+          command: firebase deploy --token=$FIREBASE_TOKEN
       
 workflows:
   version: 2

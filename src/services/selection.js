@@ -4,7 +4,7 @@ import { sendNotification } from '@/helpers/uikit';
 export default class selectionService {
   static async saveUserArtwork(artwork, userId, artworkId, type) {
     return axios
-      .post(`http://localhost:3000/users/${userId}/${type}/${artworkId}`, {
+      .post(`https://selection.cleverapps.io/users/${userId}/${type}/${artworkId}`, {
         timestamp: -Date.now(),
         addedYear: new Date().getFullYear().toString(),
         ...artwork,
@@ -19,41 +19,41 @@ export default class selectionService {
 
   static async deleteUserArtwork(userId, artworkId, type) {
     return axios
-      .delete(`http://localhost:3000/users/${userId}/${type}/${artworkId}`)
+      .delete(`https://selection.cleverapps.io/users/${userId}/${type}/${artworkId}`)
       .then(response => response.data);
   }
 
   static async getUserArtworksByType(userId, type, startAfter) {
     return axios
-      .get(`http://localhost:3000/users/${userId}/${type}?limit=20&startAfter=${startAfter}`)
+      .get(`https://selection.cleverapps.io/users/${userId}/${type}?limit=20&startAfter=${startAfter}`)
       .then(response => response.data);
   }
 
   static async getSearchResult(search) {
-    return axios.get(`http://localhost:3000/contents/search?query=${search}`)
+    return axios.get(`https://selection.cleverapps.io/contents/search?query=${search}`)
       .then(response => response.data);
   }
 
   static async getArtistAlbums(id) {
-    return axios.get(`http://localhost:3000/contents/artists/${id}/albums`)
+    return axios.get(`https://selection.cleverapps.io/contents/artists/${id}/albums`)
       .then(response => response.data)
       .catch(() => sendNotification('Erreur lors de la connexion au serveur', 'ban', 'warning'));
   }
 
   static async getTVShowDetail(id) {
-    return axios.get(`http://localhost:3000/contents/tvshow/${id}`)
+    return axios.get(`https://selection.cleverapps.io/contents/tvshow/${id}`)
       .then(response => response.data)
       .catch(() => sendNotification('Erreur lors de la connexion au serveur', 'ban', 'warning'));
   }
 
   static async getAlbumDetail(id) {
-    return axios.get(`http://localhost:3000/contents/album/${id}`)
+    return axios.get(`https://selection.cleverapps.io/contents/album/${id}`)
       .then(response => response.data)
       .catch(() => sendNotification('Erreur lors de la connexion au serveur', 'ban', 'warning'));
   }
 
   static async getUserArtworksCounts(id, type) {
-    return axios.get(`http://localhost:3000/users/${id}/${type}/count`)
+    return axios.get(`https://selection.cleverapps.io/users/${id}/${type}/count`)
       .then(response => response.data);
   }
 }

@@ -7,13 +7,13 @@ jobs:
       - checkout
       - run:
           name: Install dependencies 
-          command: yarn install --silent
+          command: npm install --quiet
       - run: 
           name: Audit dependencies
-          command: yarn audit
+          command: npm audit
       - run: 
           name: Build project
-          command: yarn build
+          command: npm run build
       - persist_to_workspace:
           root: ./
           paths: [node_modules]
@@ -29,7 +29,7 @@ jobs:
           at: ./
       - run: 
           name: Run linter
-          command: yarn lint
+          command: npm run lint
   deploy:
     docker:
       - image: node:11

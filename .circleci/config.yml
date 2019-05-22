@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies 
-          command: yarn install --quiet
+          command: yarn install --silent
       - run: 
           name: Audit dependencies
           command: yarn audit

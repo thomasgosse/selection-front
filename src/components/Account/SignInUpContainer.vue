@@ -8,12 +8,12 @@
     >
       <li>
         <a>
-          Sign In
+          Connexion
         </a>
       </li>
       <li>
         <a>
-          Sign Up
+          Création
         </a>
       </li>
     </ul>

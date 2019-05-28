@@ -7,6 +7,7 @@ import firebaseService from './services/firebase';
 import store from './store/store';
 import router from './router';
 import App from './App';
+import './registerServiceWorker';
 
 UIkit.use(Icons);
 

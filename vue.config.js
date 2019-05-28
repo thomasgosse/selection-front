@@ -3,7 +3,7 @@ module.exports = {
   productionSourceMap: false,
   pwa: {
     name: 'My App',
-    themeColor: '#BE9B6F',
+    themeColor: '#212121',
     msTileColor: '#000000',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',

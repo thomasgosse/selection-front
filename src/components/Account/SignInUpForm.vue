@@ -32,7 +32,7 @@
         <input
           v-model="username"
           class="uk-input uk-form-width-large thin-italic rounded-shape"
-          type="text"
+          type="email"
           placeholder="Adresse e-mail"
         >
       </div>

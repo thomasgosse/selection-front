@@ -1,5 +1,6 @@
 module.exports = {
   publicPath: '/',
+  productionSourceMap: false,
   pwa: {
     name: 'My App',
     themeColor: '#BE9B6F',

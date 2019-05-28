@@ -2,7 +2,7 @@ module.exports = {
   publicPath: '/',
   pwa: {
     name: 'My App',
-    themeColor: '#4DBA87',
+    themeColor: '#BE9B6F',
     msTileColor: '#000000',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',

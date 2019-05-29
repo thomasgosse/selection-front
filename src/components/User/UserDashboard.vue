@@ -1,7 +1,7 @@
 <template>
   <div class="uk-container uk-container-large uk-margin">
     <h1 class="thin-italic">
-      User's selection
+      {{ currentUser.name ? currentUser.name : 'User' }}'s selection
     </h1>
     <ul
       id="artworks"

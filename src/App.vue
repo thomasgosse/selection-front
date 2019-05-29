@@ -33,6 +33,6 @@ export default {
   border-radius: 4px
 }
 .uk-tab > .uk-active > a {
-  border-color: #212121;
+  border-color: #393939;
 }
 </style>

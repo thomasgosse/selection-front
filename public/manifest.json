@@ -1,6 +1,6 @@
 {
-  "name": "selection",
-  "short_name": "selection",
+  "name": "Selection",
+  "short_name": "Selection",
   "icons": [
     {
       "src": "./img/icons/books-192.png",
@@ -14,5 +14,5 @@
   "start_url": "/home",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#212121"
+  "theme_color": "#393939"
 }

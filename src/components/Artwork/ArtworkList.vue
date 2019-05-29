@@ -7,13 +7,12 @@
       {{ title }}
     </h2>
     <div
-      class="uk-flex-middle"
       uk-grid
     >
       <div
         v-for="item in items"
         :key="item.id"
-        class="uk-width-1-6@m artwork"
+        class="uk-width-1-4@m uk-width-1-6@xl uk-width-1-2@s uk-flex uk-flex-center"
       >
         <Artwork
           :item="item"

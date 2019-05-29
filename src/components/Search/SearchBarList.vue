@@ -127,7 +127,6 @@ export default {
 }
 
 .picture {
-    height: 5rem;
     object-fit: cover;
 }
 </style>

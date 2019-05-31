@@ -12,7 +12,7 @@
       <div
         v-for="item in items"
         :key="item.id"
-        class="uk-width-1-4@m uk-width-1-6@xl uk-width-1-2@s uk-flex uk-flex-center"
+        class="uk-width-1-4@m uk-width-1-6@xl uk-width-1-2@s uk-flex uk-flex-center artwork"
       >
         <Artwork
           :item="item"

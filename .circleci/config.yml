@@ -6,9 +6,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Set Registry
-          command: yarn config set registry https://registry.npmjs.org/
-      - run:
           name: Install dependencies 
           command: yarn install --silent
       - run: 

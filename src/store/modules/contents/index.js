@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import selectionService from '@/services/selection';
-import _ from 'lodash';
+import uniqBy from '@/helpers/uniqBy'
 
 const mutations = {
   UPDATE_CURRENT_MUSIC_ARTWORK(state, artworks) {
@@ -42,7 +42,7 @@ const getters = {
     const artworks = state.currentMusicArtworks;
     if (artworks) {
       const albums = artworks.filter(album => album.album_type === 'album');
-      return _.uniqBy(albums, 'name');
+      return uniqBy(albums, 'name');
     }
     return [];
   },
@@ -50,7 +50,7 @@ const getters = {
     const artworks = state.currentMusicArtworks;
     if (artworks) {
       const singles = artworks.filter(album => album.album_type === 'single');
-      return _.uniqBy(singles, 'name');
+      return uniqBy(singles, 'name');
     }
     return [];
   },
